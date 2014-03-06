@@ -1,0 +1,85 @@
+development plan
+================
+
+need 3-4 main entities.
+
+ - price-daemon.py
+    + gets current price of N different trade pairs
+    + updates larger file of all historical data
+    + creates/overwrites temporary current price file
+    + constantly running
+    o mainly written, small updates to get_basic_trade.py
+
+ - observer.py (class)
+    + 'observes' trend with specific set of parameters
+    + initially loads set of historical data
+    + after initial load, takes current price and adds it to the stack
+      while popping the earliest value of the stack
+    + while updating price info, checks if new price is a min or max
+    + every 60-600 updates, write observer object to file, indexed by parameters
+    ? keep track of anything else other than current state
+
+ - overlord.py (class)
+    + manages multiple observers
+    + this will allow us to run many observers in parallel
+    + loads some file with list of parameter sets
+    + creates instance of observer with each parameter set
+    + loads current price into each observer
+    + wait until time to update
+
+ - trader.py (class)
+    + This will be nearly identical to observer.py but will have option to
+      act (trade/alert) when extremum is reached.
+
+
+
+specifics
+=========
+
+-----------
+observer.py
+-----------
+
+__init__(prices,smooth,ma,md,%,tols,trader=bool):
+  o fix parameters to this instance
+    price
+    price_smooth
+    d1
+    d1_smooth
+    d2
+    d2_smooth
+    - all of these values are windowed to smooth/ma/md ?
+    trader # if this observer is going to act or just watch
+  o load prices
+  o find Initial derivatives/smooth functions
+
+update(new price,new time):
+  price.pop()/.push(newPrice)
+  smooth
+  differentiate/smooth
+  current_time = new time
+find_extrema():
+  same as previously defined
+
+step()
+  check if there's an updated price file
+  if there's a new price:
+    update()
+    find_extrema()
+    if trader: action/alert
+    if counter % 60 == 0 : backup brief
+    if counter % 360 == 0 : backup full
+
+
+-----------
+overlord.py
+-----------
+ load parameter list file
+ create observers for each parameter set in list
+ loop:
+   load current price
+   update all observers in parameter set  
+   wait
+
+
+
