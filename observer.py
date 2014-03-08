@@ -94,8 +94,6 @@ class test_set:
         self.btc = []
         self.usd = []
         self.zero = []
-        self.lastBuy = -9999
-        self.lastSell = 9999
         self.smooth=smooth
         self.md = md
         self.ma = ma
@@ -103,6 +101,13 @@ class test_set:
         self.lossTolerance = lossTolerance
         self.riseTolerance = riseTolerance
         self.orders=[]
+        self.lastBuy = -9999
+        self.lastSell = 9999
+        self.BUYFEE = 0.002
+        self.SELLFEE = 0.002
+        self.ALERT = False
+        self.EXECUTE = False
+
         
     def loadData(self,price,time):
         ''' loads price/time from lists '''
@@ -119,7 +124,9 @@ class test_set:
         self.n = len(self.price)
 
     def update(price,time):
-        ''' Given a single price/time pair, this updates the data '''
+        '''
+        Given a single price/time pair, this updates the data set 
+        '''
         self.price.append(price)
         self.time.append(time)
         self.n=self.n+1
@@ -133,76 +140,106 @@ class test_set:
         self.d2.append(get_slope(self.d1_smooth[self.n-self.md:]))
         self.d2_smooth.append(mean(self.d2[self.n-self.ma:]))
         
-    def find_extrema(self,percent=0.1,burn_in=150):
-        ''' Identify min and maxes of the price curve.'''
-        self.timer = 0
-        for i in range(burn_in+1,self.n):
-            # at minimum --> buy
-            if self.d1_smooth[i-1] <0 and self.d1_smooth[i] >0 and self.timer == 0 and self.usd[i] > 0 and self.price[i] < (1-percent)*self.lastSell:
-                print 'Buy', self.lastSell,(1-percent)*self.price[i]
-                #print 'border crossing'
-                self.buy(i)
-                
-            # at maximum --> sell
-            elif self.d1_smooth[i-1]>0 and self.d1_smooth[i]<0 and self.timer == 0 and self.btc[i]>0 and self.price[i] > (1+percent)*self.lastBuy:
-                print 'Sell', self.lastBuy, (1+percent)*self.price[i]
-                #print 'border crossing'
-                self.sell(i)
-
-            # if we dip below our risk tolerance, sell.
-            elif self.price_smooth[i] < (1-self.lossTolerance)*self.lastBuy and self.timer == 0 and self.btc[i]>0:
-                print 'Bought at %s and price is now %s Still going down, selling' % (self.lastBuy,self.price[i])
-                self.sell(i)
-                #self.timer = self.timer+15
-                
-            # if the price keeps going up after bump
-            elif self.price_smooth[i]>(1+self.riseTolerance)*self.lastSell and self.timer == 0 and self.usd[i]>0 and False:
-                print 'Still going up, buying'
-                self.buy(i)
-                #self.timer = self.timer+15
-
-            if self.timer > 0:
-                self.timer = self.timer-1
-    def add_usd(self,amt,time=0):
-        ''' add money to simulation.'''
-        self.usd=[self.usd[i] for i in range(0,time)] + [self.usd[i] + amt for i in range(time,self.n)]
-    def add_btc(self,amt,time=0):
-        ''' add money to simulation.'''
-        self.btc=[self.btc[i] for i in range(0,time)] + [self.btc[i] + amt for i in range(time,self.n)]
-
-    def buy(self,i):
+    def check_current_extreme(self):
         ''' 
-        This is the function that will perform everything necessary to purchase bitcoins.
-        Right now, it just changes the values of the dollar/BTC amount from now till the end.
+        Identify if the CURRENT price shows evidence of a minimum or maximum.
+        Also checks if an apparent previous execution was premature (SAFEGUARD)        
         '''
+
+        # CHECK IF LAST D1 WAS NEGATIVE AND CURRENT D1 IS POSITIVE 
+        # AND THE PRICE HAS DECREASED BY A CERTAIN PERCENT SINCE LAST SELL
+        # also requires that number of dollars is positive -- as in the last action was a SELL
+        if self.d1_smooth[self.n-1] <0 and self.d1_smooth[self.n] >0 and self.price[self.n] < (1-self.percent)*self.lastSell and self.usd[self.n] > 0:
+            print 'Buy\t', round(self.lastSell,1),round((1-self.percent)*self.price[self.n],1)
+            self.buy()
+            
+        # CHECK IF LAST D1 IS POSITIVE AND CURRENT D1 IS NEGATIVE
+        # AND THE PRICE HAS INCREASED BY A CERTAIN PERCENT SINCE LAST BUY
+        # also requires that number of BTC is positive -- as in last action was a BUY
+        elif self.d1_smooth[self.n-1]>0 and self.d1_smooth[self.n]<0 and self.price[self.n] > (1+self.percent)*self.lastBuy and self.btc[self.n]>0:
+            print 'Sell\t', round(self.lastBuy,1), round((1+self.percent)*self.price[self.n],1)
+            self.sell()
+
+        #### SAFE GUARDS -- RISK TOLERANCE ####
+        # if we dip below our risk tolerance, sell.
+        elif self.price_smooth[self.n] < (1-self.lossTolerance)*self.lastBuy and self.btc[self.n]>0:
+            print 'BOUGHT at %s and price is now %s Still going down, SELLING' % (round(self.lastBuy,1),round(self.price[self.n],1))
+            self.sell()
+
+        # if the price keeps going up after peak, then buy?
+        # I have not seen evidence of this happening, and actually acting on it seems slightly harder to implement.
+        elif self.price_smooth[self.n]>(1+self.riseTolerance)*self.lastSell and self.usd[self.n]>0 and False:
+            print 'SOLD at %s and price is now %s Still going up, BUYING' % (round(self.lastSell,1),round(self.price[self.n],1))
+            self.buy()
+            
+    def buy(self):
+        ''' 
+        This function simulates buying BTC with USD
+        Right now, it exchanges all USD for BTC.
+        '''
+        
+        # These are temporary amounts calculated before updating 
         newUSD = 0
-        newBTC = exchange_usd_to_btc(self.usd[i]*.998,self.price[i])
-        #    set new last buy price to keep track if things drop afterwards.
-        self.lastBuy=self.price[i]
-        self.lastSell=9999
-        #print 'New BTC: %s' % newBTC
+        newBTC = exchange_usd_to_btc(self.usd[self.n]*(1-self.BUYFEE),self.price[self.n])
+        
+        #    reset new last-buy price.
+        self.lastBuy=self.price[self.n]
+        self.lastSell=9999        
+
         # set all future values to current value
-        self.btc = [self.btc[t] for t in range(0,i)]+[newBTC for t in range(i,self.n)]
-        self.usd = [self.usd[t] for t in range(0,i)]+[newUSD for t in range(i,self.n)]
-        self.orders[i] = 1
-        self.timer = 1   
-    def sell(self,i):
+        self.btc[self.n] = newBTC
+        self.usd[self.n] = newUSD
+        
+        # Not sure what to do about this.
+        self.orders[self.n] = 1
+        
+        # Placeholders
+        if self.ALERT:   pass
+        if self.EXECUTE: pass
+            
+    def sell(self,ALERT=False, EXECUTE=False):
         ''' 
-        function will do everything necessary for selling bitcoin.
+        This function simulates selling BTC for USD
+        Exchange ALL BTC for USD
         '''
-        newUSD = exchange_btc_to_usd(self.btc[i]*.998,self.price[i])
+        # These are temprorary amounts calculated before updating.
+        newUSD = exchange_btc_to_usd(self.btc[self.n]*(1-self.SELLFEE),self.price[self.n])
         newBTC = 0
         
         # Set last sell in case price keeps increasing.
-        self.lastSell=self.price[i]
+        self.lastSell=self.price[self.n]
         self.lastBuy=-9999
-        #print 'New USD: %s ' % newUSD
         
         # change all future values
-        self.btc = [self.btc[t] for t in range(0,i)]+[newBTC for t in range(i,self.n)]
-        self.usd = [self.usd[t] for t in range(0,i)]+[newUSD for t in range(i,self.n)]
-        self.orders[i] = i
-        self.timer = 1        
+        self.btc[self.n] = newBTC
+        self.usd[self.n] = newUSD
+        
+        # Not sure what to do about this.
+        self.orders[self.n] = 1
+        
+        # Placeholders
+        if self.ALERT:   pass
+        if self.EXECUTE: pass
+
+    def step(self,price,time,backup=0):
+        # update current price/time
+        self.update(price,time)
+        
+        # Check if evidence that price is currently at a minimum or maxmium
+        # Execute theoretical trade at this point.
+        self.check_current_extreme()
+        
+        # Placeholders
+        # if backup = 1 --> update current profit summary
+        # if backup = 2 --> update larger summary object [think what this is]
+        if backup > 0:  pass
+        if backup > 1:  pass
+        
+
+    def add_usd(self,amt):
+        ''' add money to simulation.'''
+        self.usd[0]=amt
+
 
     def plot(self,burn_in=30):
         ''' Display plots of price and derivatives. '''
