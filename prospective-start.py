@@ -112,19 +112,6 @@ class test_set:
     def add_btc(self,amt,time=0):
         ''' add money to simulation.'''
         self.btc=[self.btc[i] for i in range(0,time)] + [self.btc[i] + amt for i in range(time,self.n)]
-    def update(price,time):
-        ''' This should be the main driver function... '''
-        self.price.append(price)
-        self.time.append(max(self.time)+1)
-        # do something about real time !!!
-        new_smooth_price
-        new_d1
-        new_d1_smooth
-        new_d2
-        new_d2_smooth
-        new_btc
-        new_usd
-        new_orders
         
     def calc_derivatives(self,price_smoother=30,md_window=30,ma_window=30):
         ''' Find local derivatives and smooth using a MA. '''
@@ -285,36 +272,49 @@ def iterate(mas=[20,40,80],
                             
     return np.array(parameters)
 
+(newPrice,newTime) = loadQuickData(data='data/btce_basic_btc_usd_depth.pkl')
+
+# how smooth things are
+md_window = 20
+ma_window = 60
+price_smoother = 5
+percent = 0.005
+x = test_set(price=newPrice)
+# start 
+x.calc_derivatives(price_smoother=price_smoother,md_window=md_window,ma_window=ma_window)
+x.add_usd(amt=1,time=0)
+x.find_extrema(percent=percent, burn_in=md_window+50)
+x.plot()
 
 
 
-btc_data = iterate(mas=[20,40,60,100],
-            mds=[10,20,40,100],
-            percents=[0.005,0.01,0.02,0.03,0.06,0.08], 
-            smoothers=[5,10,30,60], 
-            riseTolerances=[0.01,0.05,0.1],
-            lossTolerances=[0.01,0.05,0.1],
-            data='/media/Big Daddy/New_Documents/python/python_projects/trading/data/btce_basic_btc_usd_depth.pkl')
-ltc_data = iterate(mas=[20,40,60,100],
-            mds=[10,20,40,100],
-            percents=[0.005,0.01,0.02,0.03,0.06,0.08], 
-            smoothers=[5,10,30,60], 
-            riseTolerances=[0.01,0.05,0.1],
-            lossTolerances=[0.01,0.05,0.1],
-            data='/media/Big Daddy/New_Documents/python/python_projects/trading/data/btce_basic_ltc_usd_depth.pkl')         
-ltc_btc_data = iterate(mas=[20,40,60,100],
-            mds=[10,20,40,100],
-            percents=[0.005,0.01,0.02,0.03,0.06,0.08], 
-            smoothers=[5,10,30,60], 
-            riseTolerances=[0.01,0.05,0.1],
-            lossTolerances=[0.01,0.05,0.1],
-            data='/media/Big Daddy/New_Documents/python/python_projects/trading/data/btce_basic_ltc_btc_depth.pkl')            
+#btc_data = iterate(mas=[20,40,60,100],
+#            mds=[10,20,40,100],
+#            percents=[0.005,0.01,0.02,0.03,0.06,0.08], 
+#            smoothers=[5,10,30,60], 
+#            riseTolerances=[0.01,0.05,0.1],
+#            lossTolerances=[0.01,0.05,0.1],
+#            data='/media/Big Daddy/New_Documents/python/python_projects/trading/data/btce_basic_btc_usd_depth.pkl')
+#ltc_data = iterate(mas=[20,40,60,100],
+#            mds=[10,20,40,100],
+#            percents=[0.005,0.01,0.02,0.03,0.06,0.08], 
+#            smoothers=[5,10,30,60], 
+#            riseTolerances=[0.01,0.05,0.1],
+#            lossTolerances=[0.01,0.05,0.1],
+#            data='/media/Big Daddy/New_Documents/python/python_projects/trading/data/btce_basic_ltc_usd_depth.pkl')         
+#ltc_btc_data = iterate(mas=[20,40,60,100],
+#            mds=[10,20,40,100],
+#            percents=[0.005,0.01,0.02,0.03,0.06,0.08], 
+#            smoothers=[5,10,30,60], 
+#            riseTolerances=[0.01,0.05,0.1],
+#            lossTolerances=[0.01,0.05,0.1],
+#            data='/media/Big Daddy/New_Documents/python/python_projects/trading/data/btce_basic_ltc_btc_depth.pkl')            
 # 0=n, 1=btcs, 2=min btcs 3=max_btc 4=usds 5=min usd 6=max usd 7=ma window 8=md window 9=percent 10=smooth 11=riseTol 12=lossTol
-for i in range(5,12):
-    print i
-    plt.plot(btc_data[:,4],btc_data[:,i],'ro')
-    plt.axis([min(btc_data[:,4])*0.9,max(btc_data[:,4])*1.1,min(btc_data[:,i])*0.9,max(btc_data[:,i])*1.1])
-    plt.show()
+#for i in range(5,12):
+#    print i
+#    plt.plot(btc_data[:,4],btc_data[:,i],'ro')
+#    plt.axis([min(btc_data[:,4])*0.9,max(btc_data[:,4])*1.1,min(btc_data[:,i])*0.9,max(btc_data[:,i])*1.1])
+#    plt.show()
 
 
 def basicStart():
