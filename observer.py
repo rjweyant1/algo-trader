@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from scipy import stats
 import numpy as np
+from numpy import mean
 import math
 import random
 import matplotlib.pyplot as plt
@@ -45,7 +46,7 @@ def loadQuickData(data = '/media/Big Daddy/New_Documents/python_data/btc_usd_dep
     
     price_data=[float(i.strip()) for i in price_data]
     time_data = [float(i.strip()) for i in time_data]
-    return price_data,time_data
+    return np.array([price_data,time_data])
     
 def moving_average(x,k=30):
     ''' 
@@ -91,8 +92,8 @@ class order:
 class test_set:
     def __init__(self,smooth,md,ma,percent,lossTolerance=0.1, riseTolerance=0.1):
         self.n = 0
-        self.btc = []
-        self.usd = []
+        self.btc = [0]
+        self.usd = [1]
         self.zero = []
         self.smooth=smooth
         self.md = md
@@ -100,7 +101,7 @@ class test_set:
         self.percent=percent
         self.lossTolerance = lossTolerance
         self.riseTolerance = riseTolerance
-        self.orders=[]
+        self.orders=np.array([])
         self.lastBuy = -9999
         self.lastSell = 9999
         self.BUYFEE = 0.002
@@ -117,27 +118,35 @@ class test_set:
         
         # smoothing
         self.price_smooth = moving_average(self.price,self.smooth)
-        self.d1=moving_derivative(self.price_smooth,self.time,self.md)
-        self.d1_smooth=moving_average(self.d1,self.ma)
+        self.d1 = moving_derivative(self.price_smooth,self.time,self.md)
+        self.d1_smooth = moving_average(self.d1,self.ma)
         self.d2 = moving_derivative(self.d1,self.time,self.md)
         self.d2_smooth = moving_average(self.d2,self.ma)
-        self.n = len(self.price)
+        self.n = len(self.price)-1
+        
+        # move starting btc and usd forward
+        print self.n
+        self.btc = self.btc*(self.n+1)
+        self.usd = self.usd*(self.n+1)
 
-    def update(price,time):
+    def update(self,price,time):
         '''
         Given a single price/time pair, this updates the data set 
         '''
         self.price.append(price)
         self.time.append(time)
+        self.btc.append(self.btc[self.n])
+        self.usd.append(self.usd[self.n])
         self.n=self.n+1
         
         # do something about real time !!!
         
         # update price, derivatives and smooth functions
+        # only look at last window.
         self.price_smooth.append(mean(self.price[self.n-self.smooth:]))
-        self.d1.append(get_slope(self.price_smooth[self.n-self.md:]))
+        self.d1.append(get_slope(self.price_smooth[self.n-self.md:],self.time[self.n-self.md:]))
         self.d1_smooth.append(mean(self.d1[self.n-self.ma:]))
-        self.d2.append(get_slope(self.d1_smooth[self.n-self.md:]))
+        self.d2.append(get_slope(self.d1_smooth[self.n-self.md:],self.time[self.n-self.md:]))
         self.d2_smooth.append(mean(self.d2[self.n-self.ma:]))
         
     def check_current_extreme(self):
@@ -149,26 +158,26 @@ class test_set:
         # CHECK IF LAST D1 WAS NEGATIVE AND CURRENT D1 IS POSITIVE 
         # AND THE PRICE HAS DECREASED BY A CERTAIN PERCENT SINCE LAST SELL
         # also requires that number of dollars is positive -- as in the last action was a SELL
-        if self.d1_smooth[self.n-1] <0 and self.d1_smooth[self.n] >0 and self.price[self.n] < (1-self.percent)*self.lastSell and self.usd[self.n] > 0:
+        if self.d1_smooth[self.n-1] <0 and self.d1_smooth[self.n] >0 and self.price[self.n] < (1-self.percent)*self.lastSell and self.usd[self.n-1] > 0:
             print 'Buy\t', round(self.lastSell,1),round((1-self.percent)*self.price[self.n],1)
             self.buy()
             
         # CHECK IF LAST D1 IS POSITIVE AND CURRENT D1 IS NEGATIVE
         # AND THE PRICE HAS INCREASED BY A CERTAIN PERCENT SINCE LAST BUY
         # also requires that number of BTC is positive -- as in last action was a BUY
-        elif self.d1_smooth[self.n-1]>0 and self.d1_smooth[self.n]<0 and self.price[self.n] > (1+self.percent)*self.lastBuy and self.btc[self.n]>0:
+        elif self.d1_smooth[self.n-1]>0 and self.d1_smooth[self.n]<0 and self.price[self.n] > (1+self.percent)*self.lastBuy and self.btc[self.n-1]>0:
             print 'Sell\t', round(self.lastBuy,1), round((1+self.percent)*self.price[self.n],1)
             self.sell()
 
         #### SAFE GUARDS -- RISK TOLERANCE ####
         # if we dip below our risk tolerance, sell.
-        elif self.price_smooth[self.n] < (1-self.lossTolerance)*self.lastBuy and self.btc[self.n]>0:
+        elif self.price_smooth[self.n] < (1-self.lossTolerance)*self.lastBuy and self.btc[self.n-1]>0:
             print 'BOUGHT at %s and price is now %s Still going down, SELLING' % (round(self.lastBuy,1),round(self.price[self.n],1))
             self.sell()
 
         # if the price keeps going up after peak, then buy?
         # I have not seen evidence of this happening, and actually acting on it seems slightly harder to implement.
-        elif self.price_smooth[self.n]>(1+self.riseTolerance)*self.lastSell and self.usd[self.n]>0 and False:
+        elif self.price_smooth[self.n]>(1+self.riseTolerance)*self.lastSell and self.usd[self.n-1]>0 and False:
             print 'SOLD at %s and price is now %s Still going up, BUYING' % (round(self.lastSell,1),round(self.price[self.n],1))
             self.buy()
             
@@ -190,9 +199,12 @@ class test_set:
         self.btc[self.n] = newBTC
         self.usd[self.n] = newUSD
         
-        # Not sure what to do about this.
-        self.orders[self.n] = 1
-        
+        # stores price, time and -1 for buys.
+        # use -1 to summarize final status (raise to -1 power)
+        if self.orders.size == 0:
+            self.orders = np.array([self.price[self.n],self.time[self.n],-1])
+        elif self.orders.size > 0:
+            self.orders = np.concatenate((self.orders,np.array([self.price[self.n],self.time[self.n],-1])))
         # Placeholders
         if self.ALERT:   pass
         if self.EXECUTE: pass
@@ -214,8 +226,12 @@ class test_set:
         self.btc[self.n] = newBTC
         self.usd[self.n] = newUSD
         
-        # Not sure what to do about this.
-        self.orders[self.n] = 1
+        # stores price, time and -1 for buys.
+        # use -1 to summarize final status (raise to 1 power)
+        if self.orders.size == 0:
+            self.orders = np.array([self.price[self.n],self.time[self.n],1])
+        elif self.orders.size > 0:
+            self.orders = np.concatenate((self.orders,np.array([self.price[self.n],self.time[self.n],1])))
         
         # Placeholders
         if self.ALERT:   pass
@@ -239,7 +255,6 @@ class test_set:
     def add_usd(self,amt):
         ''' add money to simulation.'''
         self.usd[0]=amt
-
 
     def plot(self,burn_in=30):
         ''' Display plots of price and derivatives. '''
@@ -284,3 +299,15 @@ class test_set:
         ax1 = fig.add_subplot(111)
         ax1.plot(values[i:j])
         plt.show()
+
+
+
+
+datas= loadQuickData(data='data/btce_basic_btc_usd_depth.pkl')
+x = test_set(5,20,60,0.005,0.1,0.1)
+x.loadData(datas[0,0:100].tolist(),datas[1,0:100].tolist())
+for i in range(100,len(datas[0,:])):
+    x.step(datas[0,i],datas[1,i])
+    
+    
+    
