@@ -65,7 +65,5 @@ class overlord:
         '''
         Loads Workers from backups
         '''
-
-        
         pass
         

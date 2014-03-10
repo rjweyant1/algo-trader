@@ -6,16 +6,9 @@ need something more helpful here
 '''
 
 from common import *
-from scipy import stats
 import numpy as np
 from numpy import mean
-import math
-import random
 import matplotlib.pyplot as plt
-from trades import trades
-import time
-import pickle
-import matplotlib.cm as cm
 
 
 class observer:
