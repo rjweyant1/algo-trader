@@ -106,7 +106,18 @@ class observer:
         elif self.price_smooth[self.n]>(1+self.riseTolerance)*self.lastSell and self.usd[self.n-1]>0:
             print 'SOLD at %s and price is now %s Still going up, BUYING' % (round(self.lastSell,1),round(self.price[self.n],1))
             self.buy()
-            
+
+    # somehow use macd to make calls
+    # need to figure this out            
+    def macd_eval(self):
+        pass
+    
+    # placeholder for a high-frequency strategy
+    # idea is to buy and then sell for a small amount above price+fee
+    # then buy again at a small amount-fee
+    def high_freq_eval(self):
+        pass
+        
     def buy(self):
         ''' 
         This function simulates buying BTC with USD
