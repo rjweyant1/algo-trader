@@ -9,11 +9,11 @@ from common import *
 
 import pickle
 import time
-
+import os.path
 
 class overlord:
     # constructor
-    def __init__(self,smooths=[],mas=[],mds=[],percents=[],riseTols=[],lossTols=[],historical_data='data/btce_basic_btc_usd_depth.pkl'):
+    def __init__(self,smooths=[],mas=[],mds=[],percents=[],riseTols=[],lossTols=[],historical_data='data/test_data.txt'):
         self.mas = mas
         self.mds = mds
         self.smooths = smooths
@@ -32,19 +32,28 @@ class overlord:
         n_lossTols = len(lossTols)
         
         self.numWorkers= n_mas*n_mds*n_smooths*n_percents*n_riseTols*n_lossTols
-    
         self.price_data= loadData(data=historical_data) 
 
-        self.id = 'id'
+        self.getID()
 
+
+    def getID(self):
+        min_mas,max_mas,len_mas = (str(min(self.mas)),str(max(self.mas)),str(len(self.mas)))
+        min_mds,max_mds,len_mds = (str(min(self.mds)),str(max(self.mds)),str(len(self.mds)))
+        min_smooths,max_smooths,len_smooths = (str(min(self.smooths)),str(max(self.smooths)),str(len(self.smooths)))
+        min_precents,max_percents,len_percents = (str(min(self.percents)),str(max(self.percents)),str(len(self.percents)))
+        min_rise, max_rise,len_rise = (str(min(self.riseTols)),str(max(self.riseTols)),str(len(self.riseTols)))
+        min_loss,max_loss,len_loss = (str(min(self.lossTols)),str(max(self.lossTols)),str(len(self.lossTols)))
+        
+        tmp_id = len_mas+min_mas+max_mas+min_mds+max_mds+len_mds+min_smooths+max_smooths+len_smooths +min_precents+max_percents+len_percents +min_rise+ max_rise+len_rise +min_loss+max_loss+len_loss 
+        self.id = str(self.numWorkers) + tmp_id.replace('.','')
+        
+        
     def initializeWorkers(self):
         '''
         initializes workers from scratch
         '''
         # creates 7 dimensional array
-        ## Xworkers X=X np.empty((n_mas,n_mds,n_smooths,n_percents,n_riseTols,n_lossTols,7))
-        # initializes dictionary for monitoring.
-        
         for ma in self.mas:
             for md in self.mds:
                 for smooth in self.smooths:
@@ -66,7 +75,7 @@ class overlord:
         '''
         Loads Workers from backups
         '''
-        
+        pass
 
     def updateWorkers(self,price,time):
         '''
@@ -81,16 +90,17 @@ class overlord:
         ''' 
         write out a file that has parameter list + windowd profits and total profit 
         '''
-        quick_file = open('short_status_'+self.id+'.txt','w')
-        for key in self.workers.keys():
-            line = str(self.workers[key].time[-1])+','+','.join([str(i) for i in key])+','+str(self.workers[key].current_worth[-1])+'\n'
-            quick_file.write(line)
+        # append?
+        with open('results/short_status_'+self.id+'.txt','w') as quick_file:
+            for key in self.workers.keys():
+                line = str(self.workers[key].time[-1])+','+','.join([str(i) for i in key])+','+str(self.workers[key].current_worth[-1])+'\n'
+                quick_file.write(line)
     def fullBackup(self):
         '''
         writes the full overlord object, with all the historical data
         '''
-        full_backup = open('full_backup_'+self.id+'.pkl','wb')
-        pickle.dump(self,full_backup)
+        with open('results/full_backup_'+self.id+'.pkl','wb') as full_backup:
+            pickle.dump(self,full_backup)
 
     def updatePrice(self):
         '''
@@ -102,38 +112,81 @@ class overlord:
             (pair,time,price) = line.split(',')
         
         # If the current time is new, then update
-        if time != self.curTime:
-            self.curTime = time             # new time = current time
-            self.updateWorkers(price,time)  # update everyone
+        if float(time) != self.curTime:
+            self.curTime = float(time)             # new time = current time
+            self.updateWorkers(float(price),float(time))  # update everyone
         
-    def continuous_run(self,load=False):
+    def continuous_run(self,wait_time = 60, cycle_length = 60, load=False):
         '''
         continuously update this overlord's workers
         '''
-        i = 60
+        i = cycle_length
         while True:
             self.updatePrice()
             
             # Every 10 minutes make a 'quick' update
             if i % 10 == 0:
+                print 'Quick Update'
                 self.quickBackup()
             # every hour make a full backup
             if i == 0:
+                print 'Full Update'
                 self.fullBackup()
-                i = 60
+                i = cycle_length
             i = i-1
             # sleep 1 minute
-            time.sleep(60)
+            time.sleep(wait_time)
+
+def getID(smooths,mas,mds,percents,riseTols,lossTols):
+    min_mas,max_mas,len_mas = (str(min(mas)),str(max(mas)),str(len(mas)))
+    min_mds,max_mds,len_mds = (str(min(mds)),str(max(mds)),str(len(mds)))
+    min_smooths,max_smooths,len_smooths = (str(min(smooths)),str(max(smooths)),str(len(smooths)))
+    min_precents,max_percents,len_percents = (str(min(percents)),str(max(percents)),str(len(percents)))
+    min_rise, max_rise,len_rise = (str(min(riseTols)),str(max(riseTols)),str(len(riseTols)))
+    min_loss,max_loss,len_loss = (str(min(lossTols)),str(max(lossTols)),str(len(lossTols)))
+    
+    numWorkers = len(mas)*len(mds)*len(smooths)*len(percents)*len(riseTols)*len(lossTols)
+    tmp_id = len_mas+min_mas+max_mas+min_mds+max_mds+len_mds+min_smooths+max_smooths+len_smooths +min_precents+max_percents+len_percents +min_rise+ max_rise+len_rise +min_loss+max_loss+len_loss 
+    id = str(numWorkers) + tmp_id.replace('.','')
+    return id
+
+def loadOverlord(smooths,mas,mds,percents,riseTols,lossTols):
+    '''
+    check for backup, if it doesn't exist, load from scratch
+    '''
+    # what ID will be with this parameter set
+    curID = getID(smooths,mas,mds,percents,riseTols,lossTols)
+    print curID
+    backupName = 'results/full_backup_'+curID+'.pkl'
+
+    # Check for backup
+    if os.path.isfile(backupName):
+        print 'Loading from backup'
+        with open(backupName,'rb') as backup:
+            curObj = pickle.load(backup)
+            print curObj.id
+    # else create new object
+    else:   
+        print 'Creating new overlord object'
+        curObj = overlord(smooths=smooths,mas=mas,mds=mds,percents=percents,riseTols=riseTols,lossTols=lossTols)    
+        print curObj.id
+        curObj.initializeWorkers()
+    
+    return curObj
+    
+    
 
         
-x = overlord(   smooths = [10],
-                mas=[20],
-                mds=[20],
-                percents=[0.015],
-                riseTols=[0.01],
-                lossTols=[0.005]
-             )        
-x.initializeWorkers()
+x = loadOverlord(   smooths = [5],
+                    mas=[20],
+                    mds=[20],
+                    percents=[0.005],
+                    riseTols=[0.01],
+                    lossTols=[0.005]
+                )        
+
+x.continuous_run(10,2)
+
 
 #x.workers[x.workers.keys()[-1]].plot_trades()
 

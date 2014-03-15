@@ -9,14 +9,6 @@ the algorithm, but don't belong in any of the classes.
 
 from scipy import stats
 import numpy as np
-from numpy import mean
-import math
-import random
-import matplotlib.pyplot as plt
-from trades import trades
-import time
-import pickle
-import matplotlib.cm as cm
 
 def loadData(data = 'data/btce_basic_btc_usd_depth.pkl'):
     '''
@@ -31,15 +23,20 @@ def loadData(data = 'data/btce_basic_btc_usd_depth.pkl'):
     price_data = []
     time_data = []
     
-    for line in historical:
+    try:
         # get values
-       (pair,mktime,price)= line.split(',')
-       price_data.append(price)
-       time_data.append(mktime)
-    
-    # cast as floats rather than strings
-    price_data=[float(i.strip()) for i in price_data]
-    time_data = [float(i.strip()) for i in time_data]
+        for line in historical:
+            # if csv and not comment
+            if ',' in line and line[0] != '#':
+                (pair,mktime,price)= line.split(',')
+                price_data.append(price)
+                time_data.append(mktime)
+        # cast as floats rather than strings
+        price_data=[float(i.strip()) for i in price_data]
+        time_data = [float(i.strip()) for i in time_data]
+
+    except:
+        print 'Problem with file load.'
     
     # Maybe the dimensions should be fixed on this?
     return np.array([price_data,time_data])
