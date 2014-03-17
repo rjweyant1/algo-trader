@@ -67,7 +67,7 @@ def collect_data(wait=60):
             print 'ltc-usd problem'
             connection = btceapi.BTCEConnection()        
      
-        print 'done loop'
+        #print 'done loop'
 
         # Close everything in between runs so that there are 
         # no issues with simultaneous read/write

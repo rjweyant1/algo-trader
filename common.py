@@ -75,3 +75,18 @@ def get_slope(x,y):
     
 def exchange_btc_to_usd(amt,price): return(amt*price)
 def exchange_usd_to_btc(amt,price): return(amt/price)
+
+
+def getID(smooths,mas,mds,percents,riseTols,lossTols):
+    min_mas,max_mas,len_mas = (str(min(mas)),str(max(mas)),str(len(mas)))
+    min_mds,max_mds,len_mds = (str(min(mds)),str(max(mds)),str(len(mds)))
+    min_smooths,max_smooths,len_smooths = (str(min(smooths)),str(max(smooths)),str(len(smooths)))
+    min_precents,max_percents,len_percents = (str(min(percents)),str(max(percents)),str(len(percents)))
+    min_rise, max_rise,len_rise = (str(min(riseTols)),str(max(riseTols)),str(len(riseTols)))
+    min_loss,max_loss,len_loss = (str(min(lossTols)),str(max(lossTols)),str(len(lossTols)))
+    
+    numWorkers = len(mas)*len(mds)*len(smooths)*len(percents)*len(riseTols)*len(lossTols)
+    tmp_id = len_mas+min_mas+max_mas+min_mds+max_mds+len_mds+min_smooths+max_smooths+len_smooths +min_precents+max_percents+len_percents +min_rise+ max_rise+len_rise +min_loss+max_loss+len_loss 
+    id = str(numWorkers) + tmp_id.replace('.','')
+    return id
+
