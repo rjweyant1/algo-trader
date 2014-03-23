@@ -25,7 +25,7 @@ def main(argv):
         
         x = loadOverlord(parmFile=inputfile)        
         profits = [x.workers[i].current_worth[-1] for i in x.workers.keys()]
-        x.continuous_run(60,6)
+        #x.continuous_run(60,6)
     else: 
         print 'File does not exist.'        
         sys.exit()

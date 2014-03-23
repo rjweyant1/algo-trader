@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 class observer:
     # constructor
-    def __init__(self,smooth,md,ma,percent,lossTolerance=0.1, riseTolerance=0.1):
+    def __init__(self,smooth=1,md=1,ma=1,percent=0.1,lossTolerance=0.1,riseTolerance=0.1,method=1):
         self.n = 0
         self.btc = [0]
         self.usd = [1]
@@ -236,7 +236,7 @@ class observer:
         ax1.vlines(sell_times,0,2*max(self.price_smooth[burn_in:]),'r',linewidth=1)
         ax1.set_ylabel('USD/BTC',fontsize=yaxisFontSize )
         ax1.yaxis.tick_right()
-        ax1.axis([min(self.time)-20000,max(self.time)+20000,min(self.price)-10,max(self.price)+10])
+        ax1.axis([min(self.time)-20000,max(self.time)+20000,min(self.price_smooth)-5,max(self.price_smooth)+5])
         
         # First derivative
         ax2 =fig.add_subplot(212) 

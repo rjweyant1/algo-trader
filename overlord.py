@@ -219,6 +219,8 @@ def loadOverlord(parmFile=None):
                 print 'It took %s minutes to load object %s' % (duration,curObj.id)
                 # check for new data
                 curObj.synchronizeData()
+                curObj.fullBackup()
+                curObj.quickBackup()
                 
         # else create new object
         else:   
@@ -229,6 +231,7 @@ def loadOverlord(parmFile=None):
             curObj.initializeWorkers()
             curObj.curTime=time.mktime(time.localtime())
             curObj.fullBackup()
+            curObj.quickBackup()
 
         return curObj
     
