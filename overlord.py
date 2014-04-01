@@ -135,6 +135,10 @@ class overlord:
                 for key in self.workers.keys():
                     line = str(self.workers[key].time[-1])+','+','.join([str(i) for i in key])+','+str(self.workers[key].current_worth[-1])+'\n'
                     quick_file.write(line)
+            with open('results/short_dp_'+self.id+'.txt','w') as dp_file:
+                for key in self.workers.keys():
+                    line = str(self.workers[key].time[-1])+','+','.join([str(i) for i in key])+','+str(self.workers[key].daily_percent_increase[-1])+','+self.workers[key].actions[-1]+'\n'
+                    dp_file.write(line)
             print 'Quick backup successful.'
             return True
         except:
@@ -148,6 +152,14 @@ class overlord:
             timer = time.time()
             with open('results/full_backup_'+self.id+'.pkl','wb') as full_backup:
                 pickle.dump(self,full_backup)
+            
+            tmp_daily_percent = dict()
+            for key in self.workers.keys():
+                tmp_daily_percent[key]=np.array((self.workers[key].daily_percent_increase,self.workers[key].actions))
+                
+            with open('results/daily_percent_'+self.id+'.pkl','wb') as daily:
+                pickle.dump(tmp_daily_percent,daily)
+                
             duration = round((time.time() - timer ) / 60,1)
             print 'Full backup successful.  It took %s minutes to backup.' % duration
             return True

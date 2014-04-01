@@ -3,8 +3,6 @@
 '''
 The point of this code is to maintain common functions that are required for 
 the algorithm, but don't belong in any of the classes.
-
-
 '''
 
 from scipy import stats

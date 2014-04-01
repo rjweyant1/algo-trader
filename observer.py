@@ -18,6 +18,8 @@ class observer:
         self.btc = [0]
         self.usd = [1]
         self.current_worth = [1]
+        self.daily_raw_increase = []
+        self.daily_percent_increase = []
         self.zero = []
         self.smooth=smooth
         self.md = md
@@ -36,6 +38,7 @@ class observer:
         self.ALERT = False
         self.EXECUTE = False
 
+        self.actions = []
         
     def loadData(self,price,time):
         ''' 
@@ -57,6 +60,8 @@ class observer:
         self.btc = self.btc*(self.n+1)
         self.usd = self.usd*(self.n+1)
         self.current_worth = (np.array(self.btc)*np.array(self.price) + np.array(self.usd)).tolist()
+        self.actions = [0]*(self.n+1)
+        
 
     def update(self,price,time):
         '''
@@ -114,6 +119,9 @@ class observer:
             #print 'SOLD at %s and price is now %s Still going up, BUYING' % (round(self.lastSell,1),round(self.price[self.n],1))
             self.buy()
 
+        else:
+            self.actions.append(0)
+
     # somehow use macd to make calls
     # need to figure this out            
     def macd_eval(self):
@@ -153,6 +161,8 @@ class observer:
         if self.ALERT:   pass
         if self.EXECUTE: pass
             
+        self.actions.append(-1)
+        
     def sell(self,ALERT=False, EXECUTE=False):
         ''' 
         This function simulates selling BTC for USD
@@ -181,6 +191,8 @@ class observer:
         if self.ALERT:   pass
         if self.EXECUTE: pass
 
+        self.actions.append(1)
+        
     def step(self,price,time,backup=0):
         # update current price/time
         self.update(price,time)
@@ -191,12 +203,27 @@ class observer:
         
         # update current worth based on current BTC and USD amounts
         self.current_worth.append(self.btc[-1]*self.price[-1] + self.usd[-1])
+        daily_raw_increase,daily_percent_increase = self.moving_worth(i=1440)
+        self.daily_raw_increase.append(daily_raw_increase)
+        self.daily_percent_increase.append(daily_percent_increase)
         
         # Placeholders
         # if backup = 1 --> update current profit summary
         # if backup = 2 --> update larger summary object [think what this is]
         if backup > 0:  pass
         if backup > 1:  pass
+
+    def moving_worth(self,i=1440):
+        '''
+        '''
+        if len(self.time) > i:
+            raw_increase = (self.current_worth[-1] - self.current_worth[-i])
+            percent_increase = raw_increase / self.current_worth[-i]
+        else:
+            raw_increase = (self.current_worth[-1] - self.current_worth[0])
+            percent_increase = raw_increase / self.current_worth[0]
+            
+        return raw_increase,percent_increase
 
     def current_profit(self,start=0):
         ''' 
@@ -208,9 +235,14 @@ class observer:
         *** would be nice to find a way to window this to past X days or something
         '''
         profit_percent = 1
+        trade_sum=0
         for (price,date,trade_type) in self.orders:
             if date >= start:
-                profit_percent = ((trade_type == -1) * (1-self.BUYFEE) + (trade_type == 1) * (1-self.SELLFEE)) * tmp * price**trade_type
+                profit_percent = profit_percent*((trade_type == -1) * (1-self.BUYFEE) + (trade_type == 1) * (1-self.SELLFEE)) * price**trade_type
+                trade_sum = trade_sum+trade_type
+        print last_trade
+        if last_trade == -1:
+            profit_percent = profit_percent*self.price[-1]
         return profit_percent
 
     def add_usd(self,amt):
@@ -232,8 +264,8 @@ class observer:
         # price curve
         #ax1.plot(self.time[burn_in:],self.price[burn_in:], 'b',linewidth=2)
         ax1.plot(self.time[burn_in:],self.price_smooth[burn_in:], 'b',linewidth=4)
-        ax1.vlines(buy_times,0,2*max(self.price_smooth[burn_in:]),'g',linewidth=1)
-        ax1.vlines(sell_times,0,2*max(self.price_smooth[burn_in:]),'r',linewidth=1)
+        if len(buy_times) > 0: ax1.vlines(buy_times,0,2*max(self.price_smooth[burn_in:]),'g',linewidth=1)
+        if len(sell_times) > 0: ax1.vlines(sell_times,0,2*max(self.price_smooth[burn_in:]),'r',linewidth=1)
         ax1.set_ylabel('USD/BTC',fontsize=yaxisFontSize )
         ax1.yaxis.tick_right()
         ax1.axis([min(self.time)-20000,max(self.time)+20000,min(self.price_smooth)-5,max(self.price_smooth)+5])
@@ -241,8 +273,8 @@ class observer:
         # First derivative
         ax2 =fig.add_subplot(212) 
         ax2.plot(self.time[burn_in:],self.current_worth[burn_in:], 'b',linewidth=4)
-        ax2.vlines(buy_times,0,2*max(self.current_worth[burn_in:]),'g',linewidth=1)
-        ax2.vlines(sell_times,0,2*max(self.current_worth[burn_in:]),'r',linewidth=1)
+        if len(buy_times) > 0: ax2.vlines(buy_times,0,2*max(self.current_worth[burn_in:]),'g',linewidth=1)
+        if len(sell_times) > 0:ax2.vlines(sell_times,0,2*max(self.current_worth[burn_in:]),'r',linewidth=1)
         ax2.set_xlabel('TIME')
         ax2.set_ylabel('Current worth in USD',fontsize=yaxisFontSize )
         ax2.yaxis.tick_right()        
