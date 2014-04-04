@@ -1,0 +1,6 @@
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)

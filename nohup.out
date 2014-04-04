@@ -1,0 +1,934 @@
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24120020020150615151001014070710050051.pkl
+Creating new overlord object.
+24120020020150615151001014070710050051
+(200, 20, 15, 0.01, 0.7, 0.05)
+(200, 20, 15, 0.05, 0.7, 0.05)
+(200, 20, 15, 0.07, 0.7, 0.05)
+(200, 20, 15, 0.1, 0.7, 0.05)
+(200, 40, 15, 0.01, 0.7, 0.05)
+(200, 40, 15, 0.05, 0.7, 0.05)
+(200, 40, 15, 0.07, 0.7, 0.05)
+(200, 40, 15, 0.1, 0.7, 0.05)
+(200, 60, 15, 0.01, 0.7, 0.05)
+(200, 60, 15, 0.05, 0.7, 0.05)
+(200, 60, 15, 0.07, 0.7, 0.05)
+(200, 60, 15, 0.1, 0.7, 0.05)
+(200, 80, 15, 0.01, 0.7, 0.05)
+(200, 80, 15, 0.05, 0.7, 0.05)
+(200, 80, 15, 0.07, 0.7, 0.05)
+(200, 80, 15, 0.1, 0.7, 0.05)
+(200, 100, 15, 0.01, 0.7, 0.05)
+(200, 100, 15, 0.05, 0.7, 0.05)
+(200, 100, 15, 0.07, 0.7, 0.05)
+(200, 100, 15, 0.1, 0.7, 0.05)
+(200, 150, 15, 0.01, 0.7, 0.05)
+(200, 150, 15, 0.05, 0.7, 0.05)
+(200, 150, 15, 0.07, 0.7, 0.05)
+(200, 150, 15, 0.1, 0.7, 0.05)
+It took 13.9 minutes to intiialize 24 observer.  0.58 minutes per observer.
+Full backup successful.  It took 10.2 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2411001002015061010100101400500510010011.pkl
+Creating new overlord object.
+2411001002015061010100101400500510010011
+(100, 20, 10, 0.01, 0.05, 0.01)
+(100, 20, 10, 0.05, 0.05, 0.01)
+(100, 20, 10, 0.07, 0.05, 0.01)
+(100, 20, 10, 0.1, 0.05, 0.01)
+(100, 40, 10, 0.01, 0.05, 0.01)
+(100, 40, 10, 0.05, 0.05, 0.01)
+(100, 40, 10, 0.07, 0.05, 0.01)
+(100, 40, 10, 0.1, 0.05, 0.01)
+(100, 60, 10, 0.01, 0.05, 0.01)
+(100, 60, 10, 0.05, 0.05, 0.01)
+(100, 60, 10, 0.07, 0.05, 0.01)
+(100, 60, 10, 0.1, 0.05, 0.01)
+(100, 80, 10, 0.01, 0.05, 0.01)
+(100, 80, 10, 0.05, 0.05, 0.01)
+(100, 80, 10, 0.07, 0.05, 0.01)
+(100, 80, 10, 0.1, 0.05, 0.01)
+(100, 100, 10, 0.01, 0.05, 0.01)
+(100, 100, 10, 0.05, 0.05, 0.01)
+(100, 100, 10, 0.07, 0.05, 0.01)
+(100, 100, 10, 0.1, 0.05, 0.01)
+(100, 150, 10, 0.01, 0.05, 0.01)
+(100, 150, 10, 0.05, 0.05, 0.01)
+(100, 150, 10, 0.07, 0.05, 0.01)
+(100, 150, 10, 0.1, 0.05, 0.01)
+It took 10.8 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.4 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2411001002015061010100101400500510030031.pkl
+Creating new overlord object.
+2411001002015061010100101400500510030031
+(100, 20, 10, 0.01, 0.05, 0.03)
+(100, 20, 10, 0.05, 0.05, 0.03)
+(100, 20, 10, 0.07, 0.05, 0.03)
+(100, 20, 10, 0.1, 0.05, 0.03)
+(100, 40, 10, 0.01, 0.05, 0.03)
+(100, 40, 10, 0.05, 0.05, 0.03)
+(100, 40, 10, 0.07, 0.05, 0.03)
+(100, 40, 10, 0.1, 0.05, 0.03)
+(100, 60, 10, 0.01, 0.05, 0.03)
+(100, 60, 10, 0.05, 0.05, 0.03)
+(100, 60, 10, 0.07, 0.05, 0.03)
+(100, 60, 10, 0.1, 0.05, 0.03)
+(100, 80, 10, 0.01, 0.05, 0.03)
+(100, 80, 10, 0.05, 0.05, 0.03)
+(100, 80, 10, 0.07, 0.05, 0.03)
+(100, 80, 10, 0.1, 0.05, 0.03)
+(100, 100, 10, 0.01, 0.05, 0.03)
+(100, 100, 10, 0.05, 0.05, 0.03)
+(100, 100, 10, 0.07, 0.05, 0.03)
+(100, 100, 10, 0.1, 0.05, 0.03)
+(100, 150, 10, 0.01, 0.05, 0.03)
+(100, 150, 10, 0.05, 0.05, 0.03)
+(100, 150, 10, 0.07, 0.05, 0.03)
+(100, 150, 10, 0.1, 0.05, 0.03)
+It took 10.8 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.7 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2411001002015061010100101400500510050051.pkl
+Creating new overlord object.
+2411001002015061010100101400500510050051
+(100, 20, 10, 0.01, 0.05, 0.05)
+(100, 20, 10, 0.05, 0.05, 0.05)
+(100, 20, 10, 0.07, 0.05, 0.05)
+(100, 20, 10, 0.1, 0.05, 0.05)
+(100, 40, 10, 0.01, 0.05, 0.05)
+(100, 40, 10, 0.05, 0.05, 0.05)
+(100, 40, 10, 0.07, 0.05, 0.05)
+(100, 40, 10, 0.1, 0.05, 0.05)
+(100, 60, 10, 0.01, 0.05, 0.05)
+(100, 60, 10, 0.05, 0.05, 0.05)
+(100, 60, 10, 0.07, 0.05, 0.05)
+(100, 60, 10, 0.1, 0.05, 0.05)
+(100, 80, 10, 0.01, 0.05, 0.05)
+(100, 80, 10, 0.05, 0.05, 0.05)
+(100, 80, 10, 0.07, 0.05, 0.05)
+(100, 80, 10, 0.1, 0.05, 0.05)
+(100, 100, 10, 0.01, 0.05, 0.05)
+(100, 100, 10, 0.05, 0.05, 0.05)
+(100, 100, 10, 0.07, 0.05, 0.05)
+(100, 100, 10, 0.1, 0.05, 0.05)
+(100, 150, 10, 0.01, 0.05, 0.05)
+(100, 150, 10, 0.05, 0.05, 0.05)
+(100, 150, 10, 0.07, 0.05, 0.05)
+(100, 150, 10, 0.1, 0.05, 0.05)
+It took 11.0 minutes to intiialize 24 observer.  0.46 minutes per observer.
+Full backup successful.  It took 8.6 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24110010020150610101001014005005101011.pkl
+Creating new overlord object.
+24110010020150610101001014005005101011
+(100, 20, 10, 0.01, 0.05, 0.1)
+(100, 20, 10, 0.05, 0.05, 0.1)
+(100, 20, 10, 0.07, 0.05, 0.1)
+(100, 20, 10, 0.1, 0.05, 0.1)
+(100, 40, 10, 0.01, 0.05, 0.1)
+(100, 40, 10, 0.05, 0.05, 0.1)
+(100, 40, 10, 0.07, 0.05, 0.1)
+(100, 40, 10, 0.1, 0.05, 0.1)
+(100, 60, 10, 0.01, 0.05, 0.1)
+(100, 60, 10, 0.05, 0.05, 0.1)
+(100, 60, 10, 0.07, 0.05, 0.1)
+(100, 60, 10, 0.1, 0.05, 0.1)
+(100, 80, 10, 0.01, 0.05, 0.1)
+(100, 80, 10, 0.05, 0.05, 0.1)
+(100, 80, 10, 0.07, 0.05, 0.1)
+(100, 80, 10, 0.1, 0.05, 0.1)
+(100, 100, 10, 0.01, 0.05, 0.1)
+(100, 100, 10, 0.05, 0.05, 0.1)
+(100, 100, 10, 0.07, 0.05, 0.1)
+(100, 100, 10, 0.1, 0.05, 0.1)
+(100, 150, 10, 0.01, 0.05, 0.1)
+(100, 150, 10, 0.05, 0.05, 0.1)
+(100, 150, 10, 0.07, 0.05, 0.1)
+(100, 150, 10, 0.1, 0.05, 0.1)
+It took 10.8 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.4 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24110010020150610101001014010110010011.pkl
+Creating new overlord object.
+24110010020150610101001014010110010011
+(100, 20, 10, 0.01, 0.1, 0.01)
+(100, 20, 10, 0.05, 0.1, 0.01)
+(100, 20, 10, 0.07, 0.1, 0.01)
+(100, 20, 10, 0.1, 0.1, 0.01)
+(100, 40, 10, 0.01, 0.1, 0.01)
+(100, 40, 10, 0.05, 0.1, 0.01)
+(100, 40, 10, 0.07, 0.1, 0.01)
+(100, 40, 10, 0.1, 0.1, 0.01)
+(100, 60, 10, 0.01, 0.1, 0.01)
+(100, 60, 10, 0.05, 0.1, 0.01)
+(100, 60, 10, 0.07, 0.1, 0.01)
+(100, 60, 10, 0.1, 0.1, 0.01)
+(100, 80, 10, 0.01, 0.1, 0.01)
+(100, 80, 10, 0.05, 0.1, 0.01)
+(100, 80, 10, 0.07, 0.1, 0.01)
+(100, 80, 10, 0.1, 0.1, 0.01)
+(100, 100, 10, 0.01, 0.1, 0.01)
+(100, 100, 10, 0.05, 0.1, 0.01)
+(100, 100, 10, 0.07, 0.1, 0.01)
+(100, 100, 10, 0.1, 0.1, 0.01)
+(100, 150, 10, 0.01, 0.1, 0.01)
+(100, 150, 10, 0.05, 0.1, 0.01)
+(100, 150, 10, 0.07, 0.1, 0.01)
+(100, 150, 10, 0.1, 0.1, 0.01)
+It took 10.7 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.2 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24110010020150610101001014010110030031.pkl
+Creating new overlord object.
+24110010020150610101001014010110030031
+(100, 20, 10, 0.01, 0.1, 0.03)
+(100, 20, 10, 0.05, 0.1, 0.03)
+(100, 20, 10, 0.07, 0.1, 0.03)
+(100, 20, 10, 0.1, 0.1, 0.03)
+(100, 40, 10, 0.01, 0.1, 0.03)
+(100, 40, 10, 0.05, 0.1, 0.03)
+(100, 40, 10, 0.07, 0.1, 0.03)
+(100, 40, 10, 0.1, 0.1, 0.03)
+(100, 60, 10, 0.01, 0.1, 0.03)
+(100, 60, 10, 0.05, 0.1, 0.03)
+(100, 60, 10, 0.07, 0.1, 0.03)
+(100, 60, 10, 0.1, 0.1, 0.03)
+(100, 80, 10, 0.01, 0.1, 0.03)
+(100, 80, 10, 0.05, 0.1, 0.03)
+(100, 80, 10, 0.07, 0.1, 0.03)
+(100, 80, 10, 0.1, 0.1, 0.03)
+(100, 100, 10, 0.01, 0.1, 0.03)
+(100, 100, 10, 0.05, 0.1, 0.03)
+(100, 100, 10, 0.07, 0.1, 0.03)
+(100, 100, 10, 0.1, 0.1, 0.03)
+(100, 150, 10, 0.01, 0.1, 0.03)
+(100, 150, 10, 0.05, 0.1, 0.03)
+(100, 150, 10, 0.07, 0.1, 0.03)
+(100, 150, 10, 0.1, 0.1, 0.03)
+It took 10.7 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.6 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24110010020150610101001014010110050051.pkl
+Creating new overlord object.
+24110010020150610101001014010110050051
+(100, 20, 10, 0.01, 0.1, 0.05)
+(100, 20, 10, 0.05, 0.1, 0.05)
+(100, 20, 10, 0.07, 0.1, 0.05)
+(100, 20, 10, 0.1, 0.1, 0.05)
+(100, 40, 10, 0.01, 0.1, 0.05)
+(100, 40, 10, 0.05, 0.1, 0.05)
+(100, 40, 10, 0.07, 0.1, 0.05)
+(100, 40, 10, 0.1, 0.1, 0.05)
+(100, 60, 10, 0.01, 0.1, 0.05)
+(100, 60, 10, 0.05, 0.1, 0.05)
+(100, 60, 10, 0.07, 0.1, 0.05)
+(100, 60, 10, 0.1, 0.1, 0.05)
+(100, 80, 10, 0.01, 0.1, 0.05)
+(100, 80, 10, 0.05, 0.1, 0.05)
+(100, 80, 10, 0.07, 0.1, 0.05)
+(100, 80, 10, 0.1, 0.1, 0.05)
+(100, 100, 10, 0.01, 0.1, 0.05)
+(100, 100, 10, 0.05, 0.1, 0.05)
+(100, 100, 10, 0.07, 0.1, 0.05)
+(100, 100, 10, 0.1, 0.1, 0.05)
+(100, 150, 10, 0.01, 0.1, 0.05)
+(100, 150, 10, 0.05, 0.1, 0.05)
+(100, 150, 10, 0.07, 0.1, 0.05)
+(100, 150, 10, 0.1, 0.1, 0.05)
+It took 11.1 minutes to intiialize 24 observer.  0.46 minutes per observer.
+Full backup successful.  It took 8.6 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_241100100201506101010010140101101011.pkl
+Creating new overlord object.
+241100100201506101010010140101101011
+(100, 20, 10, 0.01, 0.1, 0.1)
+(100, 20, 10, 0.05, 0.1, 0.1)
+(100, 20, 10, 0.07, 0.1, 0.1)
+(100, 20, 10, 0.1, 0.1, 0.1)
+(100, 40, 10, 0.01, 0.1, 0.1)
+(100, 40, 10, 0.05, 0.1, 0.1)
+(100, 40, 10, 0.07, 0.1, 0.1)
+(100, 40, 10, 0.1, 0.1, 0.1)
+(100, 60, 10, 0.01, 0.1, 0.1)
+(100, 60, 10, 0.05, 0.1, 0.1)
+(100, 60, 10, 0.07, 0.1, 0.1)
+(100, 60, 10, 0.1, 0.1, 0.1)
+(100, 80, 10, 0.01, 0.1, 0.1)
+(100, 80, 10, 0.05, 0.1, 0.1)
+(100, 80, 10, 0.07, 0.1, 0.1)
+(100, 80, 10, 0.1, 0.1, 0.1)
+(100, 100, 10, 0.01, 0.1, 0.1)
+(100, 100, 10, 0.05, 0.1, 0.1)
+(100, 100, 10, 0.07, 0.1, 0.1)
+(100, 100, 10, 0.1, 0.1, 0.1)
+(100, 150, 10, 0.01, 0.1, 0.1)
+(100, 150, 10, 0.05, 0.1, 0.1)
+(100, 150, 10, 0.07, 0.1, 0.1)
+(100, 150, 10, 0.1, 0.1, 0.1)
+It took 10.6 minutes to intiialize 24 observer.  0.44 minutes per observer.
+Full backup successful.  It took 8.2 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2411001002015061010100101401501510010011.pkl
+Creating new overlord object.
+2411001002015061010100101401501510010011
+(100, 20, 10, 0.01, 0.15, 0.01)
+(100, 20, 10, 0.05, 0.15, 0.01)
+(100, 20, 10, 0.07, 0.15, 0.01)
+(100, 20, 10, 0.1, 0.15, 0.01)
+(100, 40, 10, 0.01, 0.15, 0.01)
+(100, 40, 10, 0.05, 0.15, 0.01)
+(100, 40, 10, 0.07, 0.15, 0.01)
+(100, 40, 10, 0.1, 0.15, 0.01)
+(100, 60, 10, 0.01, 0.15, 0.01)
+(100, 60, 10, 0.05, 0.15, 0.01)
+(100, 60, 10, 0.07, 0.15, 0.01)
+(100, 60, 10, 0.1, 0.15, 0.01)
+(100, 80, 10, 0.01, 0.15, 0.01)
+(100, 80, 10, 0.05, 0.15, 0.01)
+(100, 80, 10, 0.07, 0.15, 0.01)
+(100, 80, 10, 0.1, 0.15, 0.01)
+(100, 100, 10, 0.01, 0.15, 0.01)
+(100, 100, 10, 0.05, 0.15, 0.01)
+(100, 100, 10, 0.07, 0.15, 0.01)
+(100, 100, 10, 0.1, 0.15, 0.01)
+(100, 150, 10, 0.01, 0.15, 0.01)
+(100, 150, 10, 0.05, 0.15, 0.01)
+(100, 150, 10, 0.07, 0.15, 0.01)
+(100, 150, 10, 0.1, 0.15, 0.01)
+It took 10.8 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.5 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2411001002015061010100101401501510030031.pkl
+Creating new overlord object.
+2411001002015061010100101401501510030031
+(100, 20, 10, 0.01, 0.15, 0.03)
+(100, 20, 10, 0.05, 0.15, 0.03)
+(100, 20, 10, 0.07, 0.15, 0.03)
+(100, 20, 10, 0.1, 0.15, 0.03)
+(100, 40, 10, 0.01, 0.15, 0.03)
+(100, 40, 10, 0.05, 0.15, 0.03)
+(100, 40, 10, 0.07, 0.15, 0.03)
+(100, 40, 10, 0.1, 0.15, 0.03)
+(100, 60, 10, 0.01, 0.15, 0.03)
+(100, 60, 10, 0.05, 0.15, 0.03)
+(100, 60, 10, 0.07, 0.15, 0.03)
+(100, 60, 10, 0.1, 0.15, 0.03)
+(100, 80, 10, 0.01, 0.15, 0.03)
+(100, 80, 10, 0.05, 0.15, 0.03)
+(100, 80, 10, 0.07, 0.15, 0.03)
+(100, 80, 10, 0.1, 0.15, 0.03)
+(100, 100, 10, 0.01, 0.15, 0.03)
+(100, 100, 10, 0.05, 0.15, 0.03)
+(100, 100, 10, 0.07, 0.15, 0.03)
+(100, 100, 10, 0.1, 0.15, 0.03)
+(100, 150, 10, 0.01, 0.15, 0.03)
+(100, 150, 10, 0.05, 0.15, 0.03)
+(100, 150, 10, 0.07, 0.15, 0.03)
+(100, 150, 10, 0.1, 0.15, 0.03)
+It took 10.7 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.4 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2411001002015061010100101401501510050051.pkl
+Creating new overlord object.
+2411001002015061010100101401501510050051
+(100, 20, 10, 0.01, 0.15, 0.05)
+(100, 20, 10, 0.05, 0.15, 0.05)
+(100, 20, 10, 0.07, 0.15, 0.05)
+(100, 20, 10, 0.1, 0.15, 0.05)
+(100, 40, 10, 0.01, 0.15, 0.05)
+(100, 40, 10, 0.05, 0.15, 0.05)
+(100, 40, 10, 0.07, 0.15, 0.05)
+(100, 40, 10, 0.1, 0.15, 0.05)
+(100, 60, 10, 0.01, 0.15, 0.05)
+(100, 60, 10, 0.05, 0.15, 0.05)
+(100, 60, 10, 0.07, 0.15, 0.05)
+(100, 60, 10, 0.1, 0.15, 0.05)
+(100, 80, 10, 0.01, 0.15, 0.05)
+(100, 80, 10, 0.05, 0.15, 0.05)
+(100, 80, 10, 0.07, 0.15, 0.05)
+(100, 80, 10, 0.1, 0.15, 0.05)
+(100, 100, 10, 0.01, 0.15, 0.05)
+(100, 100, 10, 0.05, 0.15, 0.05)
+(100, 100, 10, 0.07, 0.15, 0.05)
+(100, 100, 10, 0.1, 0.15, 0.05)
+(100, 150, 10, 0.01, 0.15, 0.05)
+(100, 150, 10, 0.05, 0.15, 0.05)
+(100, 150, 10, 0.07, 0.15, 0.05)
+(100, 150, 10, 0.1, 0.15, 0.05)
+It took 10.5 minutes to intiialize 24 observer.  0.44 minutes per observer.
+Full backup successful.  It took 8.6 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24110010020150610101001014015015101011.pkl
+Creating new overlord object.
+24110010020150610101001014015015101011
+(100, 20, 10, 0.01, 0.15, 0.1)
+(100, 20, 10, 0.05, 0.15, 0.1)
+(100, 20, 10, 0.07, 0.15, 0.1)
+(100, 20, 10, 0.1, 0.15, 0.1)
+(100, 40, 10, 0.01, 0.15, 0.1)
+(100, 40, 10, 0.05, 0.15, 0.1)
+(100, 40, 10, 0.07, 0.15, 0.1)
+(100, 40, 10, 0.1, 0.15, 0.1)
+(100, 60, 10, 0.01, 0.15, 0.1)
+(100, 60, 10, 0.05, 0.15, 0.1)
+(100, 60, 10, 0.07, 0.15, 0.1)
+(100, 60, 10, 0.1, 0.15, 0.1)
+(100, 80, 10, 0.01, 0.15, 0.1)
+(100, 80, 10, 0.05, 0.15, 0.1)
+(100, 80, 10, 0.07, 0.15, 0.1)
+(100, 80, 10, 0.1, 0.15, 0.1)
+(100, 100, 10, 0.01, 0.15, 0.1)
+(100, 100, 10, 0.05, 0.15, 0.1)
+(100, 100, 10, 0.07, 0.15, 0.1)
+(100, 100, 10, 0.1, 0.15, 0.1)
+(100, 150, 10, 0.01, 0.15, 0.1)
+(100, 150, 10, 0.05, 0.15, 0.1)
+(100, 150, 10, 0.07, 0.15, 0.1)
+(100, 150, 10, 0.1, 0.15, 0.1)
+It took 10.8 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.3 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24110010020150610101001014070710010011.pkl
+Creating new overlord object.
+24110010020150610101001014070710010011
+(100, 20, 10, 0.01, 0.7, 0.01)
+(100, 20, 10, 0.05, 0.7, 0.01)
+(100, 20, 10, 0.07, 0.7, 0.01)
+(100, 20, 10, 0.1, 0.7, 0.01)
+(100, 40, 10, 0.01, 0.7, 0.01)
+(100, 40, 10, 0.05, 0.7, 0.01)
+(100, 40, 10, 0.07, 0.7, 0.01)
+(100, 40, 10, 0.1, 0.7, 0.01)
+(100, 60, 10, 0.01, 0.7, 0.01)
+(100, 60, 10, 0.05, 0.7, 0.01)
+(100, 60, 10, 0.07, 0.7, 0.01)
+(100, 60, 10, 0.1, 0.7, 0.01)
+(100, 80, 10, 0.01, 0.7, 0.01)
+(100, 80, 10, 0.05, 0.7, 0.01)
+(100, 80, 10, 0.07, 0.7, 0.01)
+(100, 80, 10, 0.1, 0.7, 0.01)
+(100, 100, 10, 0.01, 0.7, 0.01)
+(100, 100, 10, 0.05, 0.7, 0.01)
+(100, 100, 10, 0.07, 0.7, 0.01)
+(100, 100, 10, 0.1, 0.7, 0.01)
+(100, 150, 10, 0.01, 0.7, 0.01)
+(100, 150, 10, 0.05, 0.7, 0.01)
+(100, 150, 10, 0.07, 0.7, 0.01)
+(100, 150, 10, 0.1, 0.7, 0.01)
+It took 11.0 minutes to intiialize 24 observer.  0.46 minutes per observer.
+Full backup successful.  It took 8.9 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24110010020150610101001014070710030031.pkl
+Creating new overlord object.
+24110010020150610101001014070710030031
+(100, 20, 10, 0.01, 0.7, 0.03)
+(100, 20, 10, 0.05, 0.7, 0.03)
+(100, 20, 10, 0.07, 0.7, 0.03)
+(100, 20, 10, 0.1, 0.7, 0.03)
+(100, 40, 10, 0.01, 0.7, 0.03)
+(100, 40, 10, 0.05, 0.7, 0.03)
+(100, 40, 10, 0.07, 0.7, 0.03)
+(100, 40, 10, 0.1, 0.7, 0.03)
+(100, 60, 10, 0.01, 0.7, 0.03)
+(100, 60, 10, 0.05, 0.7, 0.03)
+(100, 60, 10, 0.07, 0.7, 0.03)
+(100, 60, 10, 0.1, 0.7, 0.03)
+(100, 80, 10, 0.01, 0.7, 0.03)
+(100, 80, 10, 0.05, 0.7, 0.03)
+(100, 80, 10, 0.07, 0.7, 0.03)
+(100, 80, 10, 0.1, 0.7, 0.03)
+(100, 100, 10, 0.01, 0.7, 0.03)
+(100, 100, 10, 0.05, 0.7, 0.03)
+(100, 100, 10, 0.07, 0.7, 0.03)
+(100, 100, 10, 0.1, 0.7, 0.03)
+(100, 150, 10, 0.01, 0.7, 0.03)
+(100, 150, 10, 0.05, 0.7, 0.03)
+(100, 150, 10, 0.07, 0.7, 0.03)
+(100, 150, 10, 0.1, 0.7, 0.03)
+It took 10.8 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.7 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24110010020150610101001014070710050051.pkl
+Creating new overlord object.
+24110010020150610101001014070710050051
+(100, 20, 10, 0.01, 0.7, 0.05)
+(100, 20, 10, 0.05, 0.7, 0.05)
+(100, 20, 10, 0.07, 0.7, 0.05)
+(100, 20, 10, 0.1, 0.7, 0.05)
+(100, 40, 10, 0.01, 0.7, 0.05)
+(100, 40, 10, 0.05, 0.7, 0.05)
+(100, 40, 10, 0.07, 0.7, 0.05)
+(100, 40, 10, 0.1, 0.7, 0.05)
+(100, 60, 10, 0.01, 0.7, 0.05)
+(100, 60, 10, 0.05, 0.7, 0.05)
+(100, 60, 10, 0.07, 0.7, 0.05)
+(100, 60, 10, 0.1, 0.7, 0.05)
+(100, 80, 10, 0.01, 0.7, 0.05)
+(100, 80, 10, 0.05, 0.7, 0.05)
+(100, 80, 10, 0.07, 0.7, 0.05)
+(100, 80, 10, 0.1, 0.7, 0.05)
+(100, 100, 10, 0.01, 0.7, 0.05)
+(100, 100, 10, 0.05, 0.7, 0.05)
+(100, 100, 10, 0.07, 0.7, 0.05)
+(100, 100, 10, 0.1, 0.7, 0.05)
+(100, 150, 10, 0.01, 0.7, 0.05)
+(100, 150, 10, 0.05, 0.7, 0.05)
+(100, 150, 10, 0.07, 0.7, 0.05)
+(100, 150, 10, 0.1, 0.7, 0.05)
+It took 10.9 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.7 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_241100100201506101010010140707101011.pkl
+Creating new overlord object.
+241100100201506101010010140707101011
+(100, 20, 10, 0.01, 0.7, 0.1)
+(100, 20, 10, 0.05, 0.7, 0.1)
+(100, 20, 10, 0.07, 0.7, 0.1)
+(100, 20, 10, 0.1, 0.7, 0.1)
+(100, 40, 10, 0.01, 0.7, 0.1)
+(100, 40, 10, 0.05, 0.7, 0.1)
+(100, 40, 10, 0.07, 0.7, 0.1)
+(100, 40, 10, 0.1, 0.7, 0.1)
+(100, 60, 10, 0.01, 0.7, 0.1)
+(100, 60, 10, 0.05, 0.7, 0.1)
+(100, 60, 10, 0.07, 0.7, 0.1)
+(100, 60, 10, 0.1, 0.7, 0.1)
+(100, 80, 10, 0.01, 0.7, 0.1)
+(100, 80, 10, 0.05, 0.7, 0.1)
+(100, 80, 10, 0.07, 0.7, 0.1)
+(100, 80, 10, 0.1, 0.7, 0.1)
+(100, 100, 10, 0.01, 0.7, 0.1)
+(100, 100, 10, 0.05, 0.7, 0.1)
+(100, 100, 10, 0.07, 0.7, 0.1)
+(100, 100, 10, 0.1, 0.7, 0.1)
+(100, 150, 10, 0.01, 0.7, 0.1)
+(100, 150, 10, 0.05, 0.7, 0.1)
+(100, 150, 10, 0.07, 0.7, 0.1)
+(100, 150, 10, 0.1, 0.7, 0.1)
+It took 10.9 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.7 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2760: RuntimeWarning: invalid value encountered in double_scalars
+  slope = r_num / ssxm
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: divide by zero encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24110010020150611100101400500510010011.pkl
+Creating new overlord object.
+24110010020150611100101400500510010011
+(100, 20, 1, 0.01, 0.05, 0.01)
+(100, 20, 1, 0.05, 0.05, 0.01)
+(100, 20, 1, 0.07, 0.05, 0.01)
+(100, 20, 1, 0.1, 0.05, 0.01)
+(100, 40, 1, 0.01, 0.05, 0.01)
+(100, 40, 1, 0.05, 0.05, 0.01)
+(100, 40, 1, 0.07, 0.05, 0.01)
+(100, 40, 1, 0.1, 0.05, 0.01)
+(100, 60, 1, 0.01, 0.05, 0.01)
+(100, 60, 1, 0.05, 0.05, 0.01)
+(100, 60, 1, 0.07, 0.05, 0.01)
+(100, 60, 1, 0.1, 0.05, 0.01)
+(100, 80, 1, 0.01, 0.05, 0.01)
+(100, 80, 1, 0.05, 0.05, 0.01)
+(100, 80, 1, 0.07, 0.05, 0.01)
+(100, 80, 1, 0.1, 0.05, 0.01)
+(100, 100, 1, 0.01, 0.05, 0.01)
+(100, 100, 1, 0.05, 0.05, 0.01)
+(100, 100, 1, 0.07, 0.05, 0.01)
+(100, 100, 1, 0.1, 0.05, 0.01)
+(100, 150, 1, 0.01, 0.05, 0.01)
+(100, 150, 1, 0.05, 0.05, 0.01)
+(100, 150, 1, 0.07, 0.05, 0.01)
+(100, 150, 1, 0.1, 0.05, 0.01)
+It took 10.9 minutes to intiialize 24 observer.  0.45 minutes per observer.
+Full backup successful.  It took 8.8 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2412002002015061515100101400500510030031.pkl
+Creating new overlord object.
+2412002002015061515100101400500510030031
+(200, 20, 15, 0.01, 0.05, 0.03)
+(200, 20, 15, 0.05, 0.05, 0.03)
+(200, 20, 15, 0.07, 0.05, 0.03)
+(200, 20, 15, 0.1, 0.05, 0.03)
+(200, 40, 15, 0.01, 0.05, 0.03)
+(200, 40, 15, 0.05, 0.05, 0.03)
+(200, 40, 15, 0.07, 0.05, 0.03)
+(200, 40, 15, 0.1, 0.05, 0.03)
+(200, 60, 15, 0.01, 0.05, 0.03)
+(200, 60, 15, 0.05, 0.05, 0.03)
+(200, 60, 15, 0.07, 0.05, 0.03)
+(200, 60, 15, 0.1, 0.05, 0.03)
+(200, 80, 15, 0.01, 0.05, 0.03)
+(200, 80, 15, 0.05, 0.05, 0.03)
+(200, 80, 15, 0.07, 0.05, 0.03)
+(200, 80, 15, 0.1, 0.05, 0.03)
+(200, 100, 15, 0.01, 0.05, 0.03)
+(200, 100, 15, 0.05, 0.05, 0.03)
+(200, 100, 15, 0.07, 0.05, 0.03)
+(200, 100, 15, 0.1, 0.05, 0.03)
+(200, 150, 15, 0.01, 0.05, 0.03)
+(200, 150, 15, 0.05, 0.05, 0.03)
+(200, 150, 15, 0.07, 0.05, 0.03)
+(200, 150, 15, 0.1, 0.05, 0.03)
+It took 11.4 minutes to intiialize 24 observer.  0.48 minutes per observer.
+Full backup successful.  It took 9.1 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2412002002015061515100101400500510050051.pkl
+Creating new overlord object.
+2412002002015061515100101400500510050051
+(200, 20, 15, 0.01, 0.05, 0.05)
+(200, 20, 15, 0.05, 0.05, 0.05)
+(200, 20, 15, 0.07, 0.05, 0.05)
+(200, 20, 15, 0.1, 0.05, 0.05)
+(200, 40, 15, 0.01, 0.05, 0.05)
+(200, 40, 15, 0.05, 0.05, 0.05)
+(200, 40, 15, 0.07, 0.05, 0.05)
+(200, 40, 15, 0.1, 0.05, 0.05)
+(200, 60, 15, 0.01, 0.05, 0.05)
+(200, 60, 15, 0.05, 0.05, 0.05)
+(200, 60, 15, 0.07, 0.05, 0.05)
+(200, 60, 15, 0.1, 0.05, 0.05)
+(200, 80, 15, 0.01, 0.05, 0.05)
+(200, 80, 15, 0.05, 0.05, 0.05)
+(200, 80, 15, 0.07, 0.05, 0.05)
+(200, 80, 15, 0.1, 0.05, 0.05)
+(200, 100, 15, 0.01, 0.05, 0.05)
+(200, 100, 15, 0.05, 0.05, 0.05)
+(200, 100, 15, 0.07, 0.05, 0.05)
+(200, 100, 15, 0.1, 0.05, 0.05)
+(200, 150, 15, 0.01, 0.05, 0.05)
+(200, 150, 15, 0.05, 0.05, 0.05)
+(200, 150, 15, 0.07, 0.05, 0.05)
+(200, 150, 15, 0.1, 0.05, 0.05)
+It took 11.4 minutes to intiialize 24 observer.  0.48 minutes per observer.
+Full backup successful.  It took 8.7 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24120020020150615151001014005005101011.pkl
+Creating new overlord object.
+24120020020150615151001014005005101011
+(200, 20, 15, 0.01, 0.05, 0.1)
+(200, 20, 15, 0.05, 0.05, 0.1)
+(200, 20, 15, 0.07, 0.05, 0.1)
+(200, 20, 15, 0.1, 0.05, 0.1)
+(200, 40, 15, 0.01, 0.05, 0.1)
+(200, 40, 15, 0.05, 0.05, 0.1)
+(200, 40, 15, 0.07, 0.05, 0.1)
+(200, 40, 15, 0.1, 0.05, 0.1)
+(200, 60, 15, 0.01, 0.05, 0.1)
+(200, 60, 15, 0.05, 0.05, 0.1)
+(200, 60, 15, 0.07, 0.05, 0.1)
+(200, 60, 15, 0.1, 0.05, 0.1)
+(200, 80, 15, 0.01, 0.05, 0.1)
+(200, 80, 15, 0.05, 0.05, 0.1)
+(200, 80, 15, 0.07, 0.05, 0.1)
+(200, 80, 15, 0.1, 0.05, 0.1)
+(200, 100, 15, 0.01, 0.05, 0.1)
+(200, 100, 15, 0.05, 0.05, 0.1)
+(200, 100, 15, 0.07, 0.05, 0.1)
+(200, 100, 15, 0.1, 0.05, 0.1)
+(200, 150, 15, 0.01, 0.05, 0.1)
+(200, 150, 15, 0.05, 0.05, 0.1)
+(200, 150, 15, 0.07, 0.05, 0.1)
+(200, 150, 15, 0.1, 0.05, 0.1)
+It took 11.2 minutes to intiialize 24 observer.  0.47 minutes per observer.
+Full backup successful.  It took 8.6 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24120020020150615151001014010110010011.pkl
+Creating new overlord object.
+24120020020150615151001014010110010011
+(200, 20, 15, 0.01, 0.1, 0.01)
+(200, 20, 15, 0.05, 0.1, 0.01)
+(200, 20, 15, 0.07, 0.1, 0.01)
+(200, 20, 15, 0.1, 0.1, 0.01)
+(200, 40, 15, 0.01, 0.1, 0.01)
+(200, 40, 15, 0.05, 0.1, 0.01)
+(200, 40, 15, 0.07, 0.1, 0.01)
+(200, 40, 15, 0.1, 0.1, 0.01)
+(200, 60, 15, 0.01, 0.1, 0.01)
+(200, 60, 15, 0.05, 0.1, 0.01)
+(200, 60, 15, 0.07, 0.1, 0.01)
+(200, 60, 15, 0.1, 0.1, 0.01)
+(200, 80, 15, 0.01, 0.1, 0.01)
+(200, 80, 15, 0.05, 0.1, 0.01)
+(200, 80, 15, 0.07, 0.1, 0.01)
+(200, 80, 15, 0.1, 0.1, 0.01)
+(200, 100, 15, 0.01, 0.1, 0.01)
+(200, 100, 15, 0.05, 0.1, 0.01)
+(200, 100, 15, 0.07, 0.1, 0.01)
+(200, 100, 15, 0.1, 0.1, 0.01)
+(200, 150, 15, 0.01, 0.1, 0.01)
+(200, 150, 15, 0.05, 0.1, 0.01)
+(200, 150, 15, 0.07, 0.1, 0.01)
+(200, 150, 15, 0.1, 0.1, 0.01)
+It took 11.5 minutes to intiialize 24 observer.  0.48 minutes per observer.
+Full backup successful.  It took 8.8 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24120020020150615151001014010110030031.pkl
+Creating new overlord object.
+24120020020150615151001014010110030031
+(200, 20, 15, 0.01, 0.1, 0.03)
+(200, 20, 15, 0.05, 0.1, 0.03)
+(200, 20, 15, 0.07, 0.1, 0.03)
+(200, 20, 15, 0.1, 0.1, 0.03)
+(200, 40, 15, 0.01, 0.1, 0.03)
+(200, 40, 15, 0.05, 0.1, 0.03)
+(200, 40, 15, 0.07, 0.1, 0.03)
+(200, 40, 15, 0.1, 0.1, 0.03)
+(200, 60, 15, 0.01, 0.1, 0.03)
+(200, 60, 15, 0.05, 0.1, 0.03)
+(200, 60, 15, 0.07, 0.1, 0.03)
+(200, 60, 15, 0.1, 0.1, 0.03)
+(200, 80, 15, 0.01, 0.1, 0.03)
+(200, 80, 15, 0.05, 0.1, 0.03)
+(200, 80, 15, 0.07, 0.1, 0.03)
+(200, 80, 15, 0.1, 0.1, 0.03)
+(200, 100, 15, 0.01, 0.1, 0.03)
+(200, 100, 15, 0.05, 0.1, 0.03)
+(200, 100, 15, 0.07, 0.1, 0.03)
+(200, 100, 15, 0.1, 0.1, 0.03)
+(200, 150, 15, 0.01, 0.1, 0.03)
+(200, 150, 15, 0.05, 0.1, 0.03)
+(200, 150, 15, 0.07, 0.1, 0.03)
+(200, 150, 15, 0.1, 0.1, 0.03)
+It took 11.4 minutes to intiialize 24 observer.  0.48 minutes per observer.
+Full backup successful.  It took 8.5 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_24120020020150615151001014010110050051.pkl
+Creating new overlord object.
+24120020020150615151001014010110050051
+(200, 20, 15, 0.01, 0.1, 0.05)
+(200, 20, 15, 0.05, 0.1, 0.05)
+(200, 20, 15, 0.07, 0.1, 0.05)
+(200, 20, 15, 0.1, 0.1, 0.05)
+(200, 40, 15, 0.01, 0.1, 0.05)
+(200, 40, 15, 0.05, 0.1, 0.05)
+(200, 40, 15, 0.07, 0.1, 0.05)
+(200, 40, 15, 0.1, 0.1, 0.05)
+(200, 60, 15, 0.01, 0.1, 0.05)
+(200, 60, 15, 0.05, 0.1, 0.05)
+(200, 60, 15, 0.07, 0.1, 0.05)
+(200, 60, 15, 0.1, 0.1, 0.05)
+(200, 80, 15, 0.01, 0.1, 0.05)
+(200, 80, 15, 0.05, 0.1, 0.05)
+(200, 80, 15, 0.07, 0.1, 0.05)
+(200, 80, 15, 0.1, 0.1, 0.05)
+(200, 100, 15, 0.01, 0.1, 0.05)
+(200, 100, 15, 0.05, 0.1, 0.05)
+(200, 100, 15, 0.07, 0.1, 0.05)
+(200, 100, 15, 0.1, 0.1, 0.05)
+(200, 150, 15, 0.01, 0.1, 0.05)
+(200, 150, 15, 0.05, 0.1, 0.05)
+(200, 150, 15, 0.07, 0.1, 0.05)
+(200, 150, 15, 0.1, 0.1, 0.05)
+It took 11.0 minutes to intiialize 24 observer.  0.46 minutes per observer.
+Full backup successful.  It took 8.0 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_241200200201506151510010140101101011.pkl
+Creating new overlord object.
+241200200201506151510010140101101011
+(200, 20, 15, 0.01, 0.1, 0.1)
+(200, 20, 15, 0.05, 0.1, 0.1)
+(200, 20, 15, 0.07, 0.1, 0.1)
+(200, 20, 15, 0.1, 0.1, 0.1)
+(200, 40, 15, 0.01, 0.1, 0.1)
+(200, 40, 15, 0.05, 0.1, 0.1)
+(200, 40, 15, 0.07, 0.1, 0.1)
+(200, 40, 15, 0.1, 0.1, 0.1)
+(200, 60, 15, 0.01, 0.1, 0.1)
+(200, 60, 15, 0.05, 0.1, 0.1)
+(200, 60, 15, 0.07, 0.1, 0.1)
+(200, 60, 15, 0.1, 0.1, 0.1)
+(200, 80, 15, 0.01, 0.1, 0.1)
+(200, 80, 15, 0.05, 0.1, 0.1)
+(200, 80, 15, 0.07, 0.1, 0.1)
+(200, 80, 15, 0.1, 0.1, 0.1)
+(200, 100, 15, 0.01, 0.1, 0.1)
+(200, 100, 15, 0.05, 0.1, 0.1)
+(200, 100, 15, 0.07, 0.1, 0.1)
+(200, 100, 15, 0.1, 0.1, 0.1)
+(200, 150, 15, 0.01, 0.1, 0.1)
+(200, 150, 15, 0.05, 0.1, 0.1)
+(200, 150, 15, 0.07, 0.1, 0.1)
+(200, 150, 15, 0.1, 0.1, 0.1)
+It took 11.1 minutes to intiialize 24 observer.  0.46 minutes per observer.
+Full backup successful.  It took 9.0 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2412002002015061515100101401501510010011.pkl
+Creating new overlord object.
+2412002002015061515100101401501510010011
+(200, 20, 15, 0.01, 0.15, 0.01)
+(200, 20, 15, 0.05, 0.15, 0.01)
+(200, 20, 15, 0.07, 0.15, 0.01)
+(200, 20, 15, 0.1, 0.15, 0.01)
+(200, 40, 15, 0.01, 0.15, 0.01)
+(200, 40, 15, 0.05, 0.15, 0.01)
+(200, 40, 15, 0.07, 0.15, 0.01)
+(200, 40, 15, 0.1, 0.15, 0.01)
+(200, 60, 15, 0.01, 0.15, 0.01)
+(200, 60, 15, 0.05, 0.15, 0.01)
+(200, 60, 15, 0.07, 0.15, 0.01)
+(200, 60, 15, 0.1, 0.15, 0.01)
+(200, 80, 15, 0.01, 0.15, 0.01)
+(200, 80, 15, 0.05, 0.15, 0.01)
+(200, 80, 15, 0.07, 0.15, 0.01)
+(200, 80, 15, 0.1, 0.15, 0.01)
+(200, 100, 15, 0.01, 0.15, 0.01)
+(200, 100, 15, 0.05, 0.15, 0.01)
+(200, 100, 15, 0.07, 0.15, 0.01)
+(200, 100, 15, 0.1, 0.15, 0.01)
+(200, 150, 15, 0.01, 0.15, 0.01)
+(200, 150, 15, 0.05, 0.15, 0.01)
+(200, 150, 15, 0.07, 0.15, 0.01)
+(200, 150, 15, 0.1, 0.15, 0.01)
+It took 11.2 minutes to intiialize 24 observer.  0.47 minutes per observer.
+Full backup successful.  It took 8.9 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)
+Input file is  parameters-lists/params_2412002002015061515100101401501510030031.pkl
+Creating new overlord object.
+2412002002015061515100101401501510030031
+(200, 20, 15, 0.01, 0.15, 0.03)
+(200, 20, 15, 0.05, 0.15, 0.03)
+(200, 20, 15, 0.07, 0.15, 0.03)
+(200, 20, 15, 0.1, 0.15, 0.03)
+(200, 40, 15, 0.01, 0.15, 0.03)
+(200, 40, 15, 0.05, 0.15, 0.03)
+(200, 40, 15, 0.07, 0.15, 0.03)
+(200, 40, 15, 0.1, 0.15, 0.03)
+(200, 60, 15, 0.01, 0.15, 0.03)
+(200, 60, 15, 0.05, 0.15, 0.03)
+(200, 60, 15, 0.07, 0.15, 0.03)
+(200, 60, 15, 0.1, 0.15, 0.03)
+(200, 80, 15, 0.01, 0.15, 0.03)
+(200, 80, 15, 0.05, 0.15, 0.03)
+(200, 80, 15, 0.07, 0.15, 0.03)
+(200, 80, 15, 0.1, 0.15, 0.03)
+(200, 100, 15, 0.01, 0.15, 0.03)
+(200, 100, 15, 0.05, 0.15, 0.03)
+(200, 100, 15, 0.07, 0.15, 0.03)
+(200, 100, 15, 0.1, 0.15, 0.03)
+(200, 150, 15, 0.01, 0.15, 0.03)
+(200, 150, 15, 0.05, 0.15, 0.03)
+(200, 150, 15, 0.07, 0.15, 0.03)
+(200, 150, 15, 0.1, 0.15, 0.03)
+It took 11.2 minutes to intiialize 24 observer.  0.47 minutes per observer.
+Full backup successful.  It took 8.5 minutes to backup.
+Quick backup successful.
+/usr/lib/python2.7/dist-packages/scipy/stats/stats.py:2762: RuntimeWarning: invalid value encountered in double_scalars
+  sterrest = np.sqrt((1-r*r)*ssym / ssxm / df)

@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "overlord-manager.py", line 36, in <module>
+    main(sys.argv[1:])        
+  File "overlord-manager.py", line 26, in main
+    x = loadOverlord(parmFile=inputfile)        
+  File "/media/Big Daddy/New_Documents/python/python_projects/trading/overlord.py", line 217, in loadOverlord
+    curObj = pickle.load(backup)
+  File "/usr/lib/python2.7/pickle.py", line 1378, in load
+    return Unpickler(file).load()
+  File "/usr/lib/python2.7/pickle.py", line 858, in load
+    dispatch[key](self)
+  File "/usr/lib/python2.7/pickle.py", line 1151, in load_get
+    self.append(self.memo[self.readline()[:-1]])
+KeyError: ''

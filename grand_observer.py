@@ -11,7 +11,17 @@ from overlord import *
 import numpy as np
 from numpy import mean
 import matplotlib.pyplot as plt
+from operator import itemgetter
+import smtplib  # for email
 
+# extra GMAIL accoint
+fromaddr = 'krangfromdimensionx@gmail.com'
+toaddrs  = 'robert.weyant@gmail.com'
+
+username = 'krangfromdimensionx@gmail.com'
+password = 'Shredder'
+
+results_dir = 'results/grandobserver-files/'
 
 class GrandObserver:
     # constructor
@@ -34,8 +44,8 @@ class GrandObserver:
         '''
         # read in price data
         price_data = loadData('data/btc_usd_btce.txt')
-        self.max_time = price_data[1,:]
-        self.price = price_data[0,:]
+        self.max_time = price_data[1,:].tolist()
+        self.price = price_data[0,:].tolist()
         
         # initial load
         x = dict()
@@ -43,25 +53,26 @@ class GrandObserver:
         # open up every daily_percent* file and add it in.
         # store it in temporary dictionary x, eventually into x_array
         i = 0
-        results_dir = [result for result in os.listdir('results/')  if 'daily_percent' in result]
-        for result in results_dir:
+        results_listing = [result for result in os.listdir(results_dir)  if 'daily_percent' in result]
+        for result in results_listing:
             i = i+1
             if i > 3: break
-            with open('results/'+result,'rb') as f:
+            with open(results_dir+result,'rb') as f:
                 while True:
                     try:
                         tmp = pickle.load(f)
                         x = dict(x.items() + tmp.items())
                     except EOFError:
-                        print 'Done Loading results/%s' % result
+                        print 'Done Loading %s%s' % (results_dir,result)
                         break
                 
         # extract daily percent increase and action lists from temporary dictionary x
 
         for key in x.keys():
             self.keys.append(key)
-            self.percents_list.append(x[key][0])
-            self.action_list.append(x[key][1])
+            print len(x[key][0]),len(x[key][1])
+            self.percents_list.append(x[key][0].tolist())
+            self.action_list.append(x[key][1].tolist())
             
         # make everything the same length
         self.individual_time = [self.max_time[len(i)] for i in self.percents_list ]
@@ -92,13 +103,15 @@ class GrandObserver:
             self.absolute_max.append((current_max_value,current_max_method_index))
         
 
-    def update(self,price,time):
+    def update(self):
         '''
         '''
-        results_dir = 'results/'
+        price_data = loadData('data/btc_usd_btce.txt')
+        self.max_time = price_data[1,:].tolist()
+        self.price = price_data[0,:].tolist()
         # find all short_daily_percent files
-        i = 0
         results_listing = [result for result in os.listdir(results_dir)  if 'short_dp' in result]
+        print 'Loading %s files.' % len(results_listing)
         
         # load all short_daily_percent info
         initial_load = []
@@ -110,15 +123,15 @@ class GrandObserver:
                     (time,ma,md,smooth,percent,riseTol,lossTol,dp, action) = line.split(',')
                     newLine = (time,(ma,md,smooth,percent,riseTol,lossTol),dp, action)
                     initial_load.append(newLine)
+        print 'Updating %s parameter sets.' % len(initial_load)
        
         # remove short_daily_percent files
-        #for result in results_dir:
-        #    os.remove(results_dir+result)
+        for result in results_listing:
+            os.remove(results_dir+result)
         
         # sort new entries by time
         if len(initial_load) > 1:
-            tmpArray = np.array(initial_load)
-            initial_load = tmpArray[tmpArray[:,0].argsort()].tolist()
+            initial_load = sorted(initial_load , key=itemgetter(0))
 
         # find unique parameter sets
         parameterSets = set([line[1] for line in initial_load])
@@ -126,32 +139,46 @@ class GrandObserver:
         # for each unique parameter set, update in order.        
         for params in parameterSets:
             currentUpdates = [line for line in initial_load if line[1] == params]
-    
             # step through short_daily_percent info and see load it into grand-observer
             for line in currentUpdates:
                 (time,parameters,daily_profit,action) = line
+                time = float(time)
+                action = int(action.strip())
+                parameters = tuple([float(i) for i in parameters])
                 current_method = self.keys.index(parameters)
                 # if current time beyond last time point
                 if time > self.individual_time[current_method]:
+                    #print 'updating %s for %s' % (time, current_method)
                     self.individual_time_index[current_method] = self.max_time.index(time)
                     self.individual_time[current_method] = time
                     self.action_list[current_method].append(action)
                     self.percents_list[current_method].append(daily_profit)
 
+
         # make everything the same length
         oldTimeFrame = self.timeFrame
-        self.timeFrame=min(self.individual_time_index)
+        # action_list is actually what's getting read into files
+        L = [len(i) for i in self.action_list]
+        self.timeFrame=min(self.individual_time_index+L)
         current_max_method_index = -1
                     
+        print 'Old Time Frame: ', oldTimeFrame
+        print 'New Time Frame: ', self.timeFrame
         # if any action needs to be taken, alert.
-        for i in range(self.timeFrame):
+        for i in range(oldTimeFrame, self.timeFrame):
+            
+            #if current_max_method_index != -1: print self.action_list[current_max_method_index][i]
             
             # if we are past the first entry, and action in (-1,1)
             # then place a historical order
             if current_max_method_index != -1 and self.action_list[current_max_method_index][i] != 0:
+                curAction = self.action_list[current_max_method_index][i]
                 self.orders.append(self.price[i])
                 self.order_time_index.append(i)
-                self.actions.append(self.action_list[current_max_method_index][i])
+                self.actions.append(curAction)
+                if curAction == 1:  self.sell()
+                if curAction == -1: self.buy()
+
             
             # max VALUE at current time
             current_slice = [line[i] for line in self.percents_list]
@@ -170,7 +197,31 @@ class GrandObserver:
         This function simulates buying BTC with USD
         Right now, it exchanges all USD for BTC.
         '''
-        pass
+        
+        currentPrice = self.price[self.order_time_index[-1]]
+        currentTime = self.max_time[self.order_time_index[-1]]
+        print 'Buy now.'
+        
+        print 'Current price is %s.' % currentPrice
+        print 'Order time is %s.' % currentTime
+        
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.ehlo()
+        server.starttls()
+        
+        msg = "\r\n".join([
+          "From: user_me@gmail.com",
+          "To: user_you@gmail.com",
+          "Subject: *BUY* BTC @ " + str(currentPrice) + '. Action time is: ' + str(currentTime),
+          "",
+          "BUY BTC @ " + str(currentPrice) + '. Action time is: ' + str(currentTime)
+          ])
+          
+        server.login(username,password)
+        server.sendmail(fromaddr, toaddrs, msg)
+        server.quit()
+
+        
 
         
     def sell(self,ALERT=False, EXECUTE=False):
@@ -178,7 +229,28 @@ class GrandObserver:
         This function simulates selling BTC for USD
         Exchange ALL BTC for USD
         '''
-        pass
+        currentPrice = self.price[self.order_time_index[-1]]
+        currentTime = self.max_time[self.order_time_index[-1]]
+        print 'Sell now.'
+        print 'Current price is %s.' % currentPrice
+        print 'Order time is %s.' % currentTime
+        
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.ehlo()
+        server.starttls()
+        
+        msg = "\r\n".join([
+          "From: user_me@gmail.com",
+          "To: user_you@gmail.com",
+          "Subject: *SELL* BTC @ " + str(currentPrice) + '. Action time is: ' + str(currentTime),
+          "",
+          "SELL BTC @ " + str(currentPrice) + '. Action time is: ' + str(currentTime)
+          ])
+          
+        server.login(username,password)
+        server.sendmail(fromaddr, toaddrs, msg)
+        server.quit()
+
         
     def step(self,price,time,backup=0):
         pass
@@ -197,3 +269,5 @@ class GrandObserver:
 
 test = GrandObserver()
 test.loadData()
+test.update()
+

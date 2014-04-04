@@ -20,7 +20,6 @@ class observer:
         self.current_worth = [1]
         self.daily_raw_increase = []
         self.daily_percent_increase = []
-        self.zero = []
         self.smooth=smooth
         self.md = md
         self.ma = ma
@@ -35,9 +34,6 @@ class observer:
         
         self.depth = 2*max(self.smooth,self.ma,self.md)
         
-        self.ALERT = False
-        self.EXECUTE = False
-
         self.actions = []
         
     def loadData(self,price,time):
@@ -52,8 +48,6 @@ class observer:
         self.price_smooth = moving_average(self.price,self.smooth)
         self.d1 = moving_derivative(self.price_smooth,self.time,self.md)
         self.d1_smooth = moving_average(self.d1,self.ma)
-        self.d2 = moving_derivative(self.d1,self.time,self.md)
-        self.d2_smooth = moving_average(self.d2,self.ma)
         self.n = len(self.price)-1
         
         # move starting btc and usd forward
@@ -61,6 +55,7 @@ class observer:
         self.usd = self.usd*(self.n+1)
         self.current_worth = (np.array(self.btc)*np.array(self.price) + np.array(self.usd)).tolist()
         self.actions = [0]*(self.n+1)
+        self.daily_percent_increase = [0]*(self.n+1)
         
 
     def update(self,price,time):
@@ -71,6 +66,8 @@ class observer:
         # drop old data -- resize list 
         if self.n > self.depth:
             self.price = self.price[-self.depth:]
+            self.d1 = self.d1[-self.depth:]
+            self.d1_smooth = self.d1_smooth[-self.depth:]
             #self.time = self.time[-self.depth:]
         
         self.price.append(price)
@@ -84,8 +81,7 @@ class observer:
         self.price_smooth.append(mean(self.price[-self.smooth:]))
         self.d1.append(get_slope(self.price_smooth[-self.md:],self.time[-self.md:]))
         self.d1_smooth.append(mean(self.d1[-self.ma:]))
-        self.d2.append(get_slope(self.d1_smooth[-self.md:],self.time[-self.md:]))
-        self.d2_smooth.append(mean(self.d2[-self.ma:]))
+
         
     def check_current_extreme(self):
         ''' 
@@ -122,17 +118,6 @@ class observer:
         else:
             self.actions.append(0)
 
-    # somehow use macd to make calls
-    # need to figure this out            
-    def macd_eval(self):
-        pass
-    
-    # placeholder for a high-frequency strategy
-    # idea is to buy and then sell for a small amount above price+fee
-    # then buy again at a small amount-fee
-    def high_freq_eval(self):
-        pass
-        
     def buy(self):
         ''' 
         This function simulates buying BTC with USD
@@ -157,9 +142,6 @@ class observer:
             self.orders = np.array([[self.price[-1],self.time[-1],-1]])
         elif self.orders.size > 0:
             self.orders = np.concatenate([self.orders,np.array([[self.price[-1],self.time[-1],-1]])])
-        # Placeholders
-        if self.ALERT:   pass
-        if self.EXECUTE: pass
             
         self.actions.append(-1)
         
@@ -187,9 +169,6 @@ class observer:
         elif self.orders.size > 0:
             self.orders = np.concatenate([self.orders,np.array([[self.price[-1],self.time[-1],1]])])
         
-        # Placeholders
-        if self.ALERT:   pass
-        if self.EXECUTE: pass
 
         self.actions.append(1)
         
@@ -207,12 +186,6 @@ class observer:
         self.daily_raw_increase.append(daily_raw_increase)
         self.daily_percent_increase.append(daily_percent_increase)
         
-        # Placeholders
-        # if backup = 1 --> update current profit summary
-        # if backup = 2 --> update larger summary object [think what this is]
-        if backup > 0:  pass
-        if backup > 1:  pass
-
     def moving_worth(self,i=1440):
         '''
         '''
@@ -244,62 +217,3 @@ class observer:
         if last_trade == -1:
             profit_percent = profit_percent*self.price[-1]
         return profit_percent
-
-    def add_usd(self,amt):
-        ''' add money to simulation.'''
-        self.usd[0]=amt
-
-    def plot_trades(self,burn_in=30):
-        ''' Display plots of price and approximate worth in dollars. '''
-        yaxisFontSize = 15
-        
-        fig = plt.figure()
-        ax1 =fig.add_subplot(211) 
-        
-        #print self.price
-        
-        buy_times=[i[1] for i in self.orders if i[2] == -1]
-        sell_times=[i[1] for i in self.orders if i[2] == 1]
-        
-        # price curve
-        #ax1.plot(self.time[burn_in:],self.price[burn_in:], 'b',linewidth=2)
-        ax1.plot(self.time[burn_in:],self.price_smooth[burn_in:], 'b',linewidth=4)
-        if len(buy_times) > 0: ax1.vlines(buy_times,0,2*max(self.price_smooth[burn_in:]),'g',linewidth=1)
-        if len(sell_times) > 0: ax1.vlines(sell_times,0,2*max(self.price_smooth[burn_in:]),'r',linewidth=1)
-        ax1.set_ylabel('USD/BTC',fontsize=yaxisFontSize )
-        ax1.yaxis.tick_right()
-        ax1.axis([min(self.time)-20000,max(self.time)+20000,min(self.price_smooth)-5,max(self.price_smooth)+5])
-        
-        # First derivative
-        ax2 =fig.add_subplot(212) 
-        ax2.plot(self.time[burn_in:],self.current_worth[burn_in:], 'b',linewidth=4)
-        if len(buy_times) > 0: ax2.vlines(buy_times,0,2*max(self.current_worth[burn_in:]),'g',linewidth=1)
-        if len(sell_times) > 0:ax2.vlines(sell_times,0,2*max(self.current_worth[burn_in:]),'r',linewidth=1)
-        ax2.set_xlabel('TIME')
-        ax2.set_ylabel('Current worth in USD',fontsize=yaxisFontSize )
-        ax2.yaxis.tick_right()        
-        ax2.axis([min(self.time)-20000,max(self.time)+20000,min(self.current_worth)-.05,max(self.current_worth)+.05])
-        plt.show()
-        
-    def quickPlot(self,values,i,j):
-        fig = plt.figure()
-        ax1 = fig.add_subplot(111)
-        ax1.plot(values[i:j])
-        plt.show()
-
-
-
-
-
-'''
-datas= loadData(data='data/btce_basic_btc_usd_depth.pkl')
-x = observer(5,20,60,0.005,0.05,0.05)
-x.loadData(datas[0,0:100].tolist(),datas[1,0:100].tolist())
-for i in range(100,len(datas[0,:])):
-    x.step(datas[0,i],datas[1,i])
-
-tmp = 1    
-for (price,date,trade_type) in x.orders:
-    tmp = 0.998*tmp*price**trade_type
-x.plot_trades()
-'''

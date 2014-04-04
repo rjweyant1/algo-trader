@@ -10,8 +10,11 @@ import pickle
 import time
 from datetime import datetime
 import os.path
-import sys, getopt
+import sys, getopt, shutil
 
+# dirrectorys
+overlord_dir = 'results/overlord-files/'
+grandobs_dir = 'results/grandobserver-files/'
 
 class overlord:
     # constructor
@@ -38,6 +41,7 @@ class overlord:
         self.price_data= loadData(data=historical_data) 
 
         self.getID()
+        self.numSynched = 0
 
 
     def getID(self):
@@ -117,6 +121,7 @@ class overlord:
             duration = round((time.time() - timer ) ,1)
             print 'It took %s seconds to synchronize with current data' % round(duration,1)
             print '%i prices updated.' % i
+            self.numSynched = i
                 
             return True
         
@@ -130,18 +135,27 @@ class overlord:
         ''' 
         write out a file that has parameter list + windowd profits and total profit 
         '''
-        try:
-            with open('results/short_status_'+self.id+'.txt','w') as quick_file:
+        #try:
+        if True:
+            quick_filename = 'short_status_'+self.id+'.txt'
+            with open(overlord_dir+quick_filename,'w') as quick_file:
                 for key in self.workers.keys():
                     line = str(self.workers[key].time[-1])+','+','.join([str(i) for i in key])+','+str(self.workers[key].current_worth[-1])+'\n'
                     quick_file.write(line)
-            with open('results/short_dp_'+self.id+'.txt','w') as dp_file:
+            
+            # to prevent simultaneous read-write problems, create in different directory, copy over
+            dp_filename = 'short_dp_'+self.id+'_'+str(int(self.workers[key].time[-1]))+'.txt'
+            with open(overlord_dir + dp_filename,'w') as dp_file:
                 for key in self.workers.keys():
-                    line = str(self.workers[key].time[-1])+','+','.join([str(i) for i in key])+','+str(self.workers[key].daily_percent_increase[-1])+','+self.workers[key].actions[-1]+'\n'
-                    dp_file.write(line)
+                    for j in range(-1-self.numSynched,0):
+                        line = str(self.workers[key].time[j])+','+','.join([str(i) for i in key])+','+str(self.workers[key].daily_percent_increase[j])+','+str(self.workers[key].actions[j])+'\n'
+                        dp_file.write(line)
+            shutil.copyfile(overlord_dir + dp_filename, grandobs_dir+dp_filename)
+            os.remove(overlord_dir + dp_filename)
             print 'Quick backup successful.'
             return True
-        except:
+        #except:
+        if False:
             print 'Quick backup failed.'
             return False
     def fullBackup(self):
@@ -150,14 +164,18 @@ class overlord:
         '''
         try:
             timer = time.time()
-            with open('results/full_backup_'+self.id+'.pkl','wb') as full_backup:
+            # overwrite previous back-up
+            full_backup_filename = 'full_backup_'+self.id+'.pkl'
+            with open(overlord_dir+full_backup_filename,'wb') as full_backup:
                 pickle.dump(self,full_backup)
             
             tmp_daily_percent = dict()
             for key in self.workers.keys():
                 tmp_daily_percent[key]=np.array((self.workers[key].daily_percent_increase,self.workers[key].actions))
                 
-            with open('results/daily_percent_'+self.id+'.pkl','wb') as daily:
+            # overwrite old daily-percent
+            daily_filename = 'daily_percent_'+self.id+'.pkl'
+            with open(grandobs_dir+daily_filename,'wb') as daily:
                 pickle.dump(tmp_daily_percent,daily)
                 
             duration = round((time.time() - timer ) / 60,1)
@@ -208,7 +226,7 @@ class overlord:
             # sleep 1 minute
             time.sleep(wait_time)
 
-def loadOverlord(parmFile=None):
+def loadOverlord(parmFile=None,fullBackup=False):
     '''
     check for backup, if it doesn't exist, load from scratch
     '''
@@ -219,7 +237,7 @@ def loadOverlord(parmFile=None):
                 
         # what ID will be with this parameter set
         curID = getID(smooths,mas,mds,percents,riseTols,lossTols)
-        backupName = 'results/full_backup_'+curID+'.pkl'
+        backupName = overlord_dir+'full_backup_'+curID+'.pkl'
     
         # Check for backup
         if os.path.isfile(backupName):
@@ -228,11 +246,15 @@ def loadOverlord(parmFile=None):
                 timer= time.time()
                 curObj = pickle.load(backup)
                 duration = round((time.time() - timer)/60,1)
-                print 'It took %s minutes to load object %s' % (duration,curObj.id)
+                print 'It took %s minutes to load backup.' % (duration)
                 # check for new data
                 curObj.synchronizeData()
-                curObj.fullBackup()
+                if fullBackup: 
+                    print 'Creating backup.'
+                    curObj.fullBackup()
                 curObj.quickBackup()
+                duration = round((time.time() - timer)/60,1)
+                print 'It took %s minutes to complete load and update.' % (duration)
                 
         # else create new object
         else:   
@@ -250,3 +272,5 @@ def loadOverlord(parmFile=None):
     else:
         print 'Need parameter file.'
         return None
+
+
