@@ -43,7 +43,6 @@ class overlord:
         self.getID()
         self.numSynched = 0
 
-
     def getID(self):
         min_mas,max_mas,len_mas = (str(min(self.mas)),str(max(self.mas)),str(len(self.mas)))
         min_mds,max_mds,len_mds = (str(min(self.mds)),str(max(self.mds)),str(len(self.mds)))
@@ -54,7 +53,6 @@ class overlord:
         
         tmp_id = len_mas+min_mas+max_mas+min_mds+max_mds+len_mds+min_smooths+max_smooths+len_smooths +min_precents+max_percents+len_percents +min_rise+ max_rise+len_rise +min_loss+max_loss+len_loss 
         self.id = str(self.numWorkers) + tmp_id.replace('.','')
-        
         
     def initializeWorkers(self):
         '''
@@ -83,7 +81,7 @@ class overlord:
                                 self.workers[curKey].loadData(self.price_data[0,0:initialLoadN ].tolist(),self.price_data[1,0:initialLoadN ].tolist())
                                 
                                 # cycle over the rest of the historical data
-                                for i in range(initialLoadN,len(self.price_data[0,:])):
+                                for i in xrange(initialLoadN,len(self.price_data[0,:])):
                                     self.workers[curKey].step(self.price_data[0,i],self.price_data[1,i])
         # Display how long the initialization took.
         duration = round((time.time() - timer)/60,1)
@@ -128,8 +126,6 @@ class overlord:
         except:
             print 'Synchronization failed.'
             return False
-        
-  
 
     def quickBackup(self):            
         ''' 
@@ -147,7 +143,7 @@ class overlord:
             dp_filename = 'short_dp_'+self.id+'_'+str(int(self.workers[key].time[-1]))+'.txt'
             with open(overlord_dir + dp_filename,'w') as dp_file:
                 for key in self.workers.keys():
-                    for j in range(-1-self.numSynched,0):
+                    for j in xrange(-1-self.numSynched,0):
                         line = str(self.workers[key].time[j])+','+','.join([str(i) for i in key])+','+str(self.workers[key].daily_percent_increase[j])+','+str(self.workers[key].actions[j])+'\n'
                         dp_file.write(line)
             shutil.copyfile(overlord_dir + dp_filename, grandobs_dir+dp_filename)

@@ -13,6 +13,7 @@ from numpy import mean
 import matplotlib.pyplot as plt
 from operator import itemgetter
 import smtplib  # for email
+from datetime import datetime
 
 # extra GMAIL accoint
 fromaddr = 'krangfromdimensionx@gmail.com'
@@ -52,11 +53,9 @@ class GrandObserver:
         
         # open up every daily_percent* file and add it in.
         # store it in temporary dictionary x, eventually into x_array
-        i = 0
         results_listing = [result for result in os.listdir(results_dir)  if 'daily_percent' in result]
+        print 'Loading %s daily percents.' % len(results_listing)
         for result in results_listing:
-            i = i+1
-            if i > 3: break
             with open(results_dir+result,'rb') as f:
                 while True:
                     try:
@@ -83,15 +82,18 @@ class GrandObserver:
 
         # go through whole history and make historical trades.  
         # update 3 lists: orders, actions, absolute_max.
-        for i in range(self.timeFrame):
+        for i in xrange(self.timeFrame):
             
             # if we are past the first entry, and action in (-1,1)
             # then place a historical order
             if current_max_method_index != -1 and self.action_list[current_max_method_index][i] != 0:
+                curAction = self.action_list[current_max_method_index][i]
                 self.orders.append(self.price[i])
                 self.order_time_index.append(i)
-                self.actions.append(self.action_list[current_max_method_index][i])
-            
+                self.actions.append(curAction)
+                if curAction == 1:  self.sell(i)
+                if curAction == -1: self.buy(i)
+
             # max VALUE at current time
             current_slice = [line[i] for line in self.percents_list]
             current_max_value=max(current_slice)
@@ -101,7 +103,6 @@ class GrandObserver:
             current_max_method = self.keys[current_max_method_index]
             # add max value
             self.absolute_max.append((current_max_value,current_max_method_index))
-        
 
     def update(self):
         '''
@@ -161,11 +162,12 @@ class GrandObserver:
         L = [len(i) for i in self.action_list]
         self.timeFrame=min(self.individual_time_index+L)
         current_max_method_index = -1
+        first = 0
                     
         print 'Old Time Frame: ', oldTimeFrame
         print 'New Time Frame: ', self.timeFrame
         # if any action needs to be taken, alert.
-        for i in range(oldTimeFrame, self.timeFrame):
+        for i in xrange(oldTimeFrame, self.timeFrame):
             
             #if current_max_method_index != -1: print self.action_list[current_max_method_index][i]
             
@@ -176,8 +178,8 @@ class GrandObserver:
                 self.orders.append(self.price[i])
                 self.order_time_index.append(i)
                 self.actions.append(curAction)
-                if curAction == 1:  self.sell()
-                if curAction == -1: self.buy()
+                if curAction == 1:  self.sell(i)
+                if curAction == -1: self.buy(i)
 
             
             # max VALUE at current time
@@ -190,18 +192,19 @@ class GrandObserver:
             # add max value
             self.absolute_max.append((current_max_value,current_max_method_index))
 
-        
-
-    def buy(self):
+    def buy(self,time_index=None):
         ''' 
         This function simulates buying BTC with USD
         Right now, it exchanges all USD for BTC.
         '''
         
         currentPrice = self.price[self.order_time_index[-1]]
-        currentTime = self.max_time[self.order_time_index[-1]]
+        if time_index == None:    
+            currentTime = datetime.fromtimestamp(self.max_time[-1]).strftime('%Y-%m-%d %H:%M:%S')
+        else: 
+            currentTime = datetime.fromtimestamp(self.max_time[time_index]).strftime('%Y-%m-%d %H:%M:%S')
+            
         print 'Buy now.'
-        
         print 'Current price is %s.' % currentPrice
         print 'Order time is %s.' % currentTime
         
@@ -218,19 +221,22 @@ class GrandObserver:
           ])
           
         server.login(username,password)
-        server.sendmail(fromaddr, toaddrs, msg)
+        #server.sendmail(fromaddr, toaddrs, msg)
         server.quit()
 
         
 
         
-    def sell(self,ALERT=False, EXECUTE=False):
+    def sell(self,time_index=None):
         ''' 
         This function simulates selling BTC for USD
         Exchange ALL BTC for USD
         '''
         currentPrice = self.price[self.order_time_index[-1]]
-        currentTime = self.max_time[self.order_time_index[-1]]
+        if time_index == None:    
+            currentTime = datetime.fromtimestamp(self.max_time[-1]).strftime('%Y-%m-%d %H:%M:%S')
+        else: 
+            currentTime = datetime.fromtimestamp(self.max_time[time_index]).strftime('%Y-%m-%d %H:%M:%S')
         print 'Sell now.'
         print 'Current price is %s.' % currentPrice
         print 'Order time is %s.' % currentTime
@@ -248,7 +254,7 @@ class GrandObserver:
           ])
           
         server.login(username,password)
-        server.sendmail(fromaddr, toaddrs, msg)
+        #server.sendmail(fromaddr, toaddrs, msg)
         server.quit()
 
         
@@ -266,8 +272,32 @@ class GrandObserver:
         '''
         pass
 
+def continuous_run():
+    for i in xrange(200):
+        test.update()
+        print 'waiting a minute.'
+        time.sleep(65)
 
+def profit():
+    lastOrder = 0
+    profit_percent=1
+    firstOrder = True
+    for i in xrange(len(test.orders)):
+        if test.actions[i] == lastOrder: pass
+        else:
+            print firstOrder and  (lastOrder == 1 or lastOrder == 0)
+            if firstOrder and (lastOrder == 1 or lastOrder == 0): pass
+            else:
+                profit_percent = profit_percent* test.orders[i]**test.actions[i]
+                lastOrder = test.actions[i]
+                print profit_percent
+                print lastOrder
+            firstOrder = False
+    
 test = GrandObserver()
 test.loadData()
-test.update()
+profit()
 
+
+
+            

@@ -15,8 +15,8 @@ class observer:
     # constructor
     def __init__(self,smooth=1,md=1,ma=1,percent=0.1,lossTolerance=0.1,riseTolerance=0.1,method=1):
         self.n = 0
-        self.btc = [0]
-        self.usd = [1]
+        self.btc = 0
+        self.usd = 1
         self.current_worth = [1]
         self.daily_raw_increase = []
         self.daily_percent_increase = []
@@ -51,9 +51,9 @@ class observer:
         self.n = len(self.price)-1
         
         # move starting btc and usd forward
-        self.btc = self.btc*(self.n+1)
-        self.usd = self.usd*(self.n+1)
-        self.current_worth = (np.array(self.btc)*np.array(self.price) + np.array(self.usd)).tolist()
+        #self.btc = self.btc*(self.n+1)
+        #self.usd = self.usd*(self.n+1)
+        self.current_worth = (np.array(self.btc*(self.n+1))*np.array(self.price) + np.array(self.usd*(self.n+1))).tolist()
         self.actions = [0]*(self.n+1)
         self.daily_percent_increase = [0]*(self.n+1)
         
@@ -66,14 +66,15 @@ class observer:
         # drop old data -- resize list 
         if self.n > self.depth:
             self.price = self.price[-self.depth:]
+            self.price_smooth = self.price_smooth[-self.depth:]
             self.d1 = self.d1[-self.depth:]
             self.d1_smooth = self.d1_smooth[-self.depth:]
             #self.time = self.time[-self.depth:]
         
         self.price.append(price)
         self.time.append(time)
-        self.btc.append(self.btc[self.n])
-        self.usd.append(self.usd[self.n])
+        #self.btc.append(self.btc[self.n])
+        #self.usd.append(self.usd[self.n])
         self.n=self.n+1
         
         # update price, derivatives and smooth functions
@@ -92,26 +93,26 @@ class observer:
         # CHECK IF LAST D1 WAS NEGATIVE AND CURRENT D1 IS POSITIVE 
         # AND THE PRICE HAS DECREASED BY A CERTAIN PERCENT SINCE LAST SELL
         # also requires that number of dollars is positive -- as in the last action was a SELL
-        if self.d1_smooth[-2] <0 and self.d1_smooth[-1] >0 and self.price[-1] < (1-self.percent)*self.lastSell and self.usd[-1] > 0:
+        if self.d1_smooth[-2] <0 and self.d1_smooth[-1] >0 and self.price[-1] < (1-self.percent)*self.lastSell and self.usd > 0:
             #print 'Buy\t', round(self.lastSell,1),round(self.price[self.n],1)
             self.buy()
             
         # CHECK IF LAST D1 IS POSITIVE AND CURRENT D1 IS NEGATIVE
         # AND THE PRICE HAS INCREASED BY A CERTAIN PERCENT SINCE LAST BUY
         # also requires that number of BTC is positive -- as in last action was a BUY
-        elif self.d1_smooth[-2]>0 and self.d1_smooth[-1]<0 and self.price[-1] > (1+self.percent)*self.lastBuy and self.btc[-1]>0:
+        elif self.d1_smooth[-2]>0 and self.d1_smooth[-1]<0 and self.price[-1] > (1+self.percent)*self.lastBuy and self.btc>0:
             #print 'Sell\t', round(self.lastBuy,1), round(self.price[self.n],1)
             self.sell()
 
         #### SAFE GUARDS -- RISK TOLERANCE ####
         # if we dip below our risk tolerance, sell.
-        elif self.price_smooth[-1] < (1-self.lossTolerance)*self.lastBuy and self.btc[-1]>0:
+        elif self.price_smooth[-1] < (1-self.lossTolerance)*self.lastBuy and self.btc>0:
             #print 'BOUGHT at %s and price is now %s Still going down, SELLING' % (round(self.lastBuy,1),round(self.price[self.n],1))
             self.sell()
 
         # if the price keeps going up after peak, then buy?
         # I have not seen evidence of this happening, and actually acting on it seems slightly harder to implement.
-        elif self.price_smooth[-1]>(1+self.riseTolerance)*self.lastSell and self.usd[-1]>0:
+        elif self.price_smooth[-1]>(1+self.riseTolerance)*self.lastSell and self.usd>0:
             #print 'SOLD at %s and price is now %s Still going up, BUYING' % (round(self.lastSell,1),round(self.price[self.n],1))
             self.buy()
 
@@ -126,15 +127,15 @@ class observer:
         
         # These are temporary amounts calculated before updating 
         newUSD = 0
-        newBTC = exchange_usd_to_btc(self.usd[-1]*(1-self.BUYFEE),self.price[-1])
+        newBTC = exchange_usd_to_btc(self.usd*(1-self.BUYFEE),self.price[-1])
         
         #    reset new last-buy price.
         self.lastBuy=self.price[-1]
         self.lastSell=9999        
 
         # set all future values to current value
-        self.btc[-1] = newBTC
-        self.usd[-1] = newUSD
+        self.btc = newBTC
+        self.usd = newUSD
         
         # stores price, time and -1 for buys.
         # use -1 to summarize final status (raise to -1 power)
@@ -151,7 +152,7 @@ class observer:
         Exchange ALL BTC for USD
         '''
         # These are temprorary amounts calculated before updating.
-        newUSD = exchange_btc_to_usd(self.btc[-1]*(1-self.SELLFEE),self.price[-1])
+        newUSD = exchange_btc_to_usd(self.btc*(1-self.SELLFEE),self.price[-1])
         newBTC = 0
         
         # Set last sell in case price keeps increasing.
@@ -159,8 +160,8 @@ class observer:
         self.lastBuy=-9999
         
         # change all future values
-        self.btc[self.n] = newBTC
-        self.usd[self.n] = newUSD
+        self.btc = newBTC
+        self.usd = newUSD
         
         # stores price, time and -1 for buys.
         # use -1 to summarize final status (raise to 1 power)
@@ -181,7 +182,7 @@ class observer:
         self.check_current_extreme()
         
         # update current worth based on current BTC and USD amounts
-        self.current_worth.append(self.btc[-1]*self.price[-1] + self.usd[-1])
+        self.current_worth.append(self.btc*self.price[-1] + self.usd)
         daily_raw_increase,daily_percent_increase = self.moving_worth(i=1440)
         self.daily_raw_increase.append(daily_raw_increase)
         self.daily_percent_increase.append(daily_percent_increase)

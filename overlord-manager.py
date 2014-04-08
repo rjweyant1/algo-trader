@@ -36,17 +36,17 @@ def main(argv):
         print 'Starting continuous update.'
         print '===========================\n'
         # update all overlords
-        for i in range(1,101):
+        for i in xrange(1,10001):
             roundTimer = time.time()
             if i % 10 == 0:
                 print '\n====================================================';
                 print 'Round %s.  Backing up all runs.  Will take longer.' % i
                 print '====================================================';
-            for j in range(len(overlords)):
+            for j in xrange(len(overlords)):
                 try:
                     overlords[j].synchronizeData()
                     overlords[j].quickBackup()
-                    if i % 10 == 0:
+                    if i % 10 == -2:
                         overlords[j].fullBackup()
                 except:
                     print 'Problem in object %s during round %s' % j,i
@@ -55,7 +55,7 @@ def main(argv):
             waitTime = round(max(65-roundDuration,0),1)
             print 'Round took %s seconds.  Will be waiting %s seconds.' % (roundDuration, waitTime)
             time.sleep(waitTime)
-            
+
             
     else: 
         print 'File does not exist!'   

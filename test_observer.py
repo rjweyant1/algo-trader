@@ -5,7 +5,7 @@ This is just a functional test of observer class
 '''
 
 # These are the modules created for this project
-from observer_dev import *
+from observer import *
 from common import *
 
 # Load data

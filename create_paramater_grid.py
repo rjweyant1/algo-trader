@@ -5,12 +5,21 @@ import pickle
 from common import *
 
 #def create_grid():
+
+fsmooths = [1,5,10]
+fmas = [20,60,80,200]
+fmds = [20,60,80,200]
+fpercents = [0.005,0.01,0.02,0.03,0.05]
+friseTols = [0.05,0.1,0.15]
+flossTols = [0.05,0.1,0.15]
+'''
 fsmooths = [10]
-fmas = [80]
-fmds = [20,60,80]
-fpercents = [0.01,0.02,0.05]
+fmas = [60]
+fmds = [20,60]
+fpercents = [0.02]
 friseTols = [0.1]
-flossTols = [0.05]
+flossTols = [0.1]
+'''
 
 smooths=[]
 mas=[]
