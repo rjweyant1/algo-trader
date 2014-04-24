@@ -169,7 +169,6 @@ class observer:
             self.orders = np.array([[self.price[-1],self.time[-1],1]])
         elif self.orders.size > 0:
             self.orders = np.concatenate([self.orders,np.array([[self.price[-1],self.time[-1],1]])])
-        
 
         self.actions.append(1)
         

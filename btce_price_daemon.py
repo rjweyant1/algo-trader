@@ -37,14 +37,14 @@ def collect_data(wait=60):
     # infinite loop
     while 1:
         # Keep a running list of everything
-        btc_usd_f = open('/media/Big Daddy/New_Documents/python/python_projects/trading/data/btc_usd_btce.txt', 'a')
-        ltc_btc_f = open('/media/Big Daddy/New_Documents/python/python_projects/trading/data/ltc_usd_btce.txt', 'a')
-        ltc_usd_f = open('/media/Big Daddy/New_Documents/python/python_projects/trading/data/ltc_btc_btce.txt', 'a')
+        btc_usd_f = open('data/btc_usd_btce.txt', 'a')
+        ltc_btc_f = open('data/ltc_usd_btce.txt', 'a')
+        ltc_usd_f = open('data/ltc_btc_btce.txt', 'a')
 
         # Temporary files for loading into observers
-        btc_usd_tmp = open('/media/Big Daddy/New_Documents/python/python_projects/trading/data/btc_usd_btce.tmp', 'w')
-        ltc_btc_tmp = open('/media/Big Daddy/New_Documents/python/python_projects/trading/data/ltc_usd_btce.tmp', 'w')
-        ltc_usd_tmp = open('/media/Big Daddy/New_Documents/python/python_projects/trading/data/ltc_btc_btce.tmp', 'w')
+        btc_usd_tmp = open('data/btc_usd_btce.tmp', 'w')
+        ltc_btc_tmp = open('data/ltc_usd_btce.tmp', 'w')
+        ltc_usd_tmp = open('data/ltc_btc_btce.tmp', 'w')
 
         #initialize connection
         connection = btceapi.BTCEConnection()

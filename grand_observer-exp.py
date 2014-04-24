@@ -73,11 +73,13 @@ class GrandObserver:
         # extract daily percent increase and action lists from temporary dictionary x
 
         for key in x.keys():
-            self.keys.append(key)
-            #print len(x[key][0]),len(x[key][1])
-            self.percents_list.append(x[key][0].tolist())
-            self.action_list.append(x[key][1].tolist())
-            
+            # !!! "Good"  list mod.
+            if key in best:
+                self.keys.append(key)
+                #print len(x[key][0]),len(x[key][1])
+                self.percents_list.append(x[key][0].tolist())
+                self.action_list.append(x[key][1].tolist())
+        del x      
         # make everything the same length
         #self.individual_time = [self.max_time[len(i)] for i in self.percents_list ]
         #self.individual_time_index = [len(i) for i in self.percents_list]

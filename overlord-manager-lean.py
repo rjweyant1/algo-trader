@@ -28,33 +28,13 @@ def main(argv):
         print '\n\n\n\n\n\n\n\n\n\n\n==============================================='
         print '   Starting data load. Managing %s overlords.' % len(param_files)
         print '===============================================\n\n\n'
+        i = 0
         # Load all overlords
         for param_f in param_files:
-            overlords.append(loadOverlord(parmFile=param_dir+'/'+param_f,fullBackup=True))
-            
-        print '\n==========================='
-        print 'Starting continuous update.'
-        print '===========================\n'
-        # update all overlords
-        for i in xrange(1,1):
-            roundTimer = time.time()
-            if i % 10 == 0:
-                print '\n====================================================';
-                print 'Round %s.  Backing up all runs.  Will take longer.' % i
-                print '====================================================';
-            for j in xrange(len(overlords)):
-                try:
-                    overlords[j].synchronizeData()
-                    overlords[j].quickBackup()
-                    if i % 10 == -2:
-                        overlords[j].fullBackup()
-                except:
-                    print 'Problem in object %s during round %s' % j,i
-                    
-            roundDuration = round(time.time() - roundTimer,1)
-            waitTime = round(max(65-roundDuration,0),1)
-            print 'Round took %s seconds.  Will be waiting %s seconds.' % (roundDuration, waitTime)
-            time.sleep(waitTime)
+            i=i+1
+            print 'Running overlord %s of %s' % (i,len(param_files))
+            loadOverlord(parmFile=param_dir+'/'+param_f,fullBackup=True)
+            print '======================================\n'
 
             
     else: 
