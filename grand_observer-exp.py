@@ -60,21 +60,23 @@ class GrandObserver:
         # store it in temporary dictionary x, eventually into x_array
         results_listing = [result for result in os.listdir(results_dir)  if 'daily_percent' in result]
         print 'Loading %s daily percents.' % len(results_listing)
+        j = 0
         for result in results_listing:
-            with open(results_dir+result,'rb') as f:
-                while True:
-                    try:
-                        tmp = pickle.load(f)
-                        x = dict(x.items() + tmp.items())
-                    except EOFError:
-                        print 'Done Loading %s%s' % (results_dir,result)
-                        break
+            j = j+1
+            if j % 5 == 0:
+                with open(results_dir+result,'rb') as f:
+                    while True:
+                        try:
+                            tmp = pickle.load(f)
+                            x = dict(x.items() + tmp.items())
+                        except EOFError:
+                            print 'Done Loading %s%s' % (results_dir,result)
+                            break
                 
         # extract daily percent increase and action lists from temporary dictionary x
-
         for key in x.keys():
             # !!! "Good"  list mod.
-            if key in best:
+            if key in best or True:
                 self.keys.append(key)
                 #print len(x[key][0]),len(x[key][1])
                 self.percents_list.append(x[key][0].tolist())
@@ -97,13 +99,14 @@ class GrandObserver:
         self.timeFrame=min(self.individual_time_index)
         
         current_max_method_index = -1
+        timer = 0
+        timer_reset = 30
         # go through whole history and make historical trades.  
         # update 3 lists: orders, actions, absolute_max.
         for i in xrange(self.timeFrame):
-            
             # if we are past the first entry, and action in (-1,1)
             # then place a historical order
-            if current_max_method_index != -1 and self.action_list[current_max_method_index][i] != 0:
+            if current_max_method_index != -1 and self.action_list[current_max_method_index][i] != 0 :
                 curAction = self.action_list[current_max_method_index][i]
                 self.orders.append(self.price[i])
                 self.order_time_index.append(i)
@@ -111,18 +114,24 @@ class GrandObserver:
                 if curAction == 1:  self.sell(i)
                 if curAction == -1: self.buy(i)
 
+
             # max VALUE at current time
             current_slice = [line[i] for line in self.percents_list]
             current_max_value=max(current_slice)
-                        
             # INDEX strategy that maximuzes
             current_max_method_index= current_slice.index(current_max_value)
             current_max_method = self.keys[current_max_method_index]
+                
             self.daily_max_method.append(current_max_method)
             self.daily_maxes.append(current_max_value)
             # add max value
             self.absolute_max.append((current_max_value,current_max_method_index))
-
+            
+            timer = timer + 1
+            if timer > timer_reset: timer = 0
+           
+            if len(self.orders) > 6: break            
+            
     def update(self):
         '''
         '''
@@ -210,6 +219,8 @@ class GrandObserver:
             current_max_method = self.keys[current_max_method_index]
             # add max value
             self.absolute_max.append((current_max_value,current_max_method_index))
+            
+
 
     def buy(self,time_index=None):
         ''' 

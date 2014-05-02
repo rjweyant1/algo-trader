@@ -60,15 +60,19 @@ class GrandObserver:
         # store it in temporary dictionary x, eventually into x_array
         results_listing = [result for result in os.listdir(results_dir)  if 'daily_percent' in result]
         print 'Loading %s daily percents.' % len(results_listing)
+        j = 0
         for result in results_listing:
-            with open(results_dir+result,'rb') as f:
-                while True:
-                    try:
-                        tmp = pickle.load(f)
-                        x = dict(x.items() + tmp.items())
-                    except EOFError:
-                        print 'Done Loading %s%s' % (results_dir,result)
-                        break
+            j = j+1
+            if j % 200 == 0:
+                with open(results_dir+result,'rb') as f:
+                    while True:
+                        try:
+                            tmp = pickle.load(f)
+                            x = dict(x.items() + tmp.items())
+                        except EOFError:
+                            print 'Done Loading %s%s' % (results_dir,result)
+                            break
+                
                 
         # extract daily percent increase and action lists from temporary dictionary x
         for key in x.keys():
@@ -337,4 +341,7 @@ x = [(i,test.daily_max_method.count(i)) for i in set(test.daily_max_method)]
 count = [test.daily_max_method.count(i) for i in set(test.daily_max_method)]
 
 
+best = open('results/overlord-files/full_backup_1140406060110101005005101501510050051.pkl','rb')
+bestObs = pickle.load(best)
+curbest = bestObs.workers[bestObs.workers.keys()[0]]
             

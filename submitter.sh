@@ -1,1 +1,1 @@
-/usr/bin/python overlord-manager.py -i parameters-lists
+/usr/bin/python overlord-manager-lean.py -i parameters-lists

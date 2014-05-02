@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import btceapi
 from collections import deque
 import csv

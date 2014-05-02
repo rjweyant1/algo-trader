@@ -70,6 +70,7 @@ class GrandObserver:
                         print 'Done Loading %s%s' % (results_dir,result)
                         break
                 
+                
         # extract daily percent increase and action lists from temporary dictionary x
         for key in x.keys():
             self.keys.append(key)
@@ -326,15 +327,20 @@ def continuous_run():
         test.update()
         time.sleep(65)
 
+
 best = [(150, 40, 10, 0.01, 0.05, 0.1), (100, 40, 10, 0.01, 0.15, 0.05), (60, 60, 5, 0.03, 0.15, 0.15), (150, 40, 1, 0.03, 0.15, 0.05), (150, 60, 5, 0.01, 0.15, 0.05), (100, 40, 5, 0.03, 0.05, 0.1), (40, 40, 10, 0.02, 0.15, 0.05), (40, 80, 10, 0.02, 0.05, 0.1), (100, 40, 10, 0.01, 0.05, 0.1), (60, 60, 1, 0.02, 0.15, 0.1), (100, 40, 10, 0.01, 0.15, 0.1), (60, 60, 1, 0.02, 0.15, 0.15), (150, 40, 10, 0.01, 0.05, 0.05), (100, 150, 1, 0.03, 0.05, 0.05), (100, 40, 1, 0.02, 0.1, 0.1), (100, 40, 10, 0.01, 0.05, 0.05)]
-    
 test = GrandObserver()
 test.loadData()
 test.profit()
-
 
 x = [(i,test.daily_max_method.count(i)) for i in set(test.daily_max_method)]
 count = [test.daily_max_method.count(i) for i in set(test.daily_max_method)]
 
 
+if False:
+    best = open('results/overlord-files/full_backup_1140406060110101005005101501510050051.pkl','rb')
+    bestObs = pickle.load(best)
+    curbest = bestObs.workers[bestObs.workers.keys()[0]]
+    (40, 60, 10, 0.05, 0.15, 0.05)
+    getID(smooths=[10],mas = [40],mds=[60],percents =[.05],riseTols=[0.15],lossTols=[.05])
             
