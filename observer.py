@@ -192,6 +192,7 @@ class observer:
         if len(self.time) > i:
             raw_increase = (self.current_worth[-1] - self.current_worth[-i])
             percent_increase = raw_increase / self.current_worth[-i]
+            
         else:
             raw_increase = (self.current_worth[-1] - self.current_worth[0])
             percent_increase = raw_increase / self.current_worth[0]

@@ -25,9 +25,9 @@ def main(argv):
         param_files = [i for i in os.listdir(param_dir) if 'pkl' in i and 'param' in i]
         overlords = []
         
-        print '\n\n\n\n\n\n\n\n\n\n\n==============================================='
+        print '\n\n==============================================='
         print '   Starting data load. Managing %s overlords.' % len(param_files)
-        print '===============================================\n\n\n'
+        print '===============================================\n'
         # Load all overlords
         for param_f in param_files:
             overlords.append(loadOverlord(parmFile=param_dir+'/'+param_f,fullBackup=True))
@@ -35,8 +35,10 @@ def main(argv):
         print '\n==========================='
         print 'Starting continuous update.'
         print '===========================\n'
+        i=0
         # update all overlords
-        for i in xrange(1,1):
+        while True:
+            i = i + 1
             roundTimer = time.time()
             if i % 10 == 0:
                 print '\n====================================================';
@@ -44,16 +46,18 @@ def main(argv):
                 print '====================================================';
             for j in xrange(len(overlords)):
                 try:
+                    print 'Updating overlord.  First data point at %s' % datetime.fromtimestamp(overlords[j].firstTime).strftime('%m-%d-%y %H:%M')
+                    print 'Overlord started at %s' % datetime.fromtimestamp(overlords[j].startTime).strftime('%m-%d %H:%M')
                     overlords[j].synchronizeData()
                     overlords[j].quickBackup()
-                    if i % 10 == -2:
-                        overlords[j].fullBackup()
+                    overlords[j].fullBackup()
                 except:
                     print 'Problem in object %s during round %s' % j,i
-                    
+                
             roundDuration = round(time.time() - roundTimer,1)
             waitTime = round(max(65-roundDuration,0),1)
             print 'Round took %s seconds.  Will be waiting %s seconds.' % (roundDuration, waitTime)
+            print '\n=========================================================\n'                    
             time.sleep(waitTime)
 
             

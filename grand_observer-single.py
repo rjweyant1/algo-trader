@@ -21,7 +21,7 @@ fromaddr = 'krangfromdimensionx@gmail.com'
 toaddrs  = 'robert.weyant@gmail.com'
 
 username = 'krangfromdimensionx@gmail.com'
-password = 'Shredder'
+password = 'bqurtgboktfjkfyh'
 
 results_dir = 'results/grandobserver-files/'
 
@@ -226,9 +226,9 @@ class GrandObserver:
         print 'Current price is %s.' % currentPrice
         print 'Order time is %s.' % currentTime
         print '======================================='
-        #server = smtplib.SMTP('smtp.gmail.com:587')
-        #server.ehlo()
-        #server.starttls()
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.ehlo()
+        server.starttls()
         
         msg = "\r\n".join([
           "From: user_me@gmail.com",
@@ -238,9 +238,9 @@ class GrandObserver:
           "BUY BTC @ " + str(currentPrice) + '. Action time is: ' + str(currentTime)
           ])
           
-        #server.login(username,password)
-        #server.sendmail(fromaddr, toaddrs, msg)
-        #server.quit()
+        server.login(username,password)
+        server.sendmail(fromaddr, toaddrs, msg)
+        server.quit()
        
     def sell(self,time_index=None):
         ''' 
@@ -258,9 +258,9 @@ class GrandObserver:
         print 'Order time is %s.' % currentTime
         print '======================================='
         
-        #server = smtplib.SMTP('smtp.gmail.com:587')
-        #server.ehlo()
-        #server.starttls()
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.ehlo()
+        server.starttls()
         
         msg = "\r\n".join([
           "From: user_me@gmail.com",
@@ -270,9 +270,9 @@ class GrandObserver:
           "SELL BTC @ " + str(currentPrice) + '. Action time is: ' + str(currentTime)
           ])
           
-        #server.login(username,password)
-        #server.sendmail(fromaddr, toaddrs, msg)
-        #server.quit()
+        server.login(username,password)
+        server.sendmail(fromaddr, toaddrs, msg)
+        server.quit()
 
         
     def step(self,price,time,backup=0):
@@ -323,7 +323,7 @@ class GrandObserver:
                 if self.actions[i] == -1:   firstOrder = False
 
 def continuous_run():
-    for i in xrange(200):
+    for i in xrange(2000):
         test.update()
         time.sleep(65)
 
@@ -331,7 +331,7 @@ def continuous_run():
 best = [(150, 40, 10, 0.01, 0.05, 0.1), (100, 40, 10, 0.01, 0.15, 0.05), (60, 60, 5, 0.03, 0.15, 0.15), (150, 40, 1, 0.03, 0.15, 0.05), (150, 60, 5, 0.01, 0.15, 0.05), (100, 40, 5, 0.03, 0.05, 0.1), (40, 40, 10, 0.02, 0.15, 0.05), (40, 80, 10, 0.02, 0.05, 0.1), (100, 40, 10, 0.01, 0.05, 0.1), (60, 60, 1, 0.02, 0.15, 0.1), (100, 40, 10, 0.01, 0.15, 0.1), (60, 60, 1, 0.02, 0.15, 0.15), (150, 40, 10, 0.01, 0.05, 0.05), (100, 150, 1, 0.03, 0.05, 0.05), (100, 40, 1, 0.02, 0.1, 0.1), (100, 40, 10, 0.01, 0.05, 0.05)]
 test = GrandObserver()
 test.loadData()
-test.profit()
+continuous_run()
 
 x = [(i,test.daily_max_method.count(i)) for i in set(test.daily_max_method)]
 count = [test.daily_max_method.count(i) for i in set(test.daily_max_method)]
